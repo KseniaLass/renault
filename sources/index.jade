@@ -1,0 +1,12 @@
+extends layout/template
+
+block vars
+	- var jsTemplate = 'index'; // page-specific js file for logic describing
+	- var pageTemplate = 'index'; // page-specific class on main element
+
+block head
+	script(src="/js/es6.js")
+	script(src="/generated/main.js")
+
+block content
+	h1 hello!!!
