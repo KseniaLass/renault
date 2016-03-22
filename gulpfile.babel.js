@@ -32,29 +32,6 @@ var sassConfig = {
 	bowerDir: './bower_components'
 };
 
-// Misc Functions
-var bundles = [];
-let checkJsBundles = () => {
-	let p = SOURCES_DIR + '/js/';
-	fs.readdir(p, (err, files)  => {
-		if (err){
-			throw err;
-		}
-
-		files.map((file) => {
-			return path.join(p, file)
-		}).filter((file) => {
-			return fs.statSync(file).isFile();
-		}).forEach((file) => {
-			console.log("%s (%s)", file, path.extname(file))
-		})
-	})
-};
-
-let genJsBundles = (config) => {
-
-};
-
 
 
 
@@ -122,22 +99,92 @@ gulp.task('dist:jade', () => {
 });
 
 gulp.task('serve:start', ['serve:sass', 'serve:jade', 'watch', 'web-bs'], () => {
-	checkJsBundles();
+	console.log(browserifyConfig.entryFile);
 });
 
 // browserify
 
 let bundler;
 
+// Misc Functions
+let bundlers = [];
+let checkIfBundleExists = (filename, array) => {
+	let result = false;
+
+	array.some(function(el){
+		result = el.fileName === filename;
+		return result;
+	});
+
+	return result;
+};
+
+/// todo: Написана ф-ция проверки, если бандл уже записан в массив. Реализовать дополнение новыми бандлами, подключить вотчер.
+/// todo: Написать обработку бандлов и компиляцию. Подумать о конкатенации.
+
+
+let checkJsBundles = () => {
+	let p = SOURCES_DIR + '/js/';
+	let newFiles = [];
+
+	var returns = true;
+
+	var files = fs.readdirSync(p);
+
+	files.map((file) => {
+		console.log('1: ', file);
+		return path.join(p, file)
+	}).filter((file) => {
+		console.log('2: ', file);
+		return fs.statSync(file).isFile();
+	}).forEach((file) => {
+		console.log('3: ', file);
+		let exists = checkIfBundleExists(path.basename(file), browserifyConfig.entryFile);
+
+		if (!exists){
+			newFiles.push(path.basename(file));
+		}
+
+		//console.log("%s (%s)", file, path.extname(file), exists);
+	});
+
+	console.log('new::: ', newFiles);
+
+
+	return (newFiles.length ? genJsBundles(newFiles) : false);
+
+};
+
+let genJsBundles = (arr, entriesStorage=browserifyConfig.entryFile) => {
+	arr.forEach((el) => {
+		let temp = {
+			fileName: el,
+			filePath: SOURCES_DIR + '/js/',
+			bundleName: 'bundle.' + el
+		};
+
+		entriesStorage.push(temp);
+	});
+
+	return entriesStorage;
+};
+
 let browserifyConfig = {
-	entryFile: SOURCES_DIR + '/js/main.js',
-	outputDir: PUBLIC_DIR + '/js/',
-	outputFile: 'es6.js'
+	entryFile: [{
+		fileName: 'main.js',
+		filePath: SOURCES_DIR + '/js/',
+		bundleName: 'bundle.main.js'
+	}],
+	outputDir: PUBLIC_DIR + '/js/'
 };
 
 function getBundler() {
+
+	var res = checkJsBundles();
+	console.log('res', res);
+
 	if (!bundler) {
-		bundler = watchify(browserify(browserifyConfig.entryFile, _.extend({ debug: true }, watchify.args)));
+		bundler = watchify(browserify(browserifyConfig.entryFile.filePath + browserifyConfig.entryFile.fileName, _.extend({ debug: true }, watchify.args)));
 	}
 	return bundler;
 }
@@ -147,7 +194,7 @@ function bundle() {
 		.transform(babelify)
 		.bundle()
 		.on('error', function(err) { console.log('Error: ' + err.message); })
-		.pipe(source(browserifyConfig.outputFile))
+		.pipe(source(browserifyConfig.entryFile[0].bundleName))
 		.pipe(gulp.dest(browserifyConfig.outputDir))
 		.pipe(reload({ stream: true }));
 }
