@@ -190,7 +190,7 @@ function getBundler() {
 
 	for (var i in bundlesList){
 		if (bundlesList.hasOwnProperty(i)){
-			console.log(bundlers, i);
+			//console.log(bundlers, i);
 
 
 			if (typeof bundlers[i] === 'undefined'){
@@ -207,9 +207,23 @@ function getBundler() {
 	return bundlers;
 }
 
-function bundle() {
+function bundle(key=null) {
 
 	let b = getBundler();
+
+	if (key){
+		b[key].bundler
+			.transform(babelify)
+			.bundle()
+			.on('error', function (err) {
+				console.log('Error: ' + err.message);
+			})
+			.pipe(source(browserifyConfig.entryFile[b[key].name].bundleName))
+			.pipe(gulp.dest(browserifyConfig.outputDir))
+			.pipe(reload({stream: true}));
+
+		return b;
+	}
 
 	for (let key in b){
 		if (b.hasOwnProperty(key)){
@@ -257,7 +271,7 @@ gulp.task('web-bs', ['build-persistent'], function () {
 	for (let key in b){
 		if (b.hasOwnProperty(key)){
 			b[key].bundler.on('update', function () {
-				gulp.start('build-persistent')
+				bundle(key);
 			});
 		}
 	}
