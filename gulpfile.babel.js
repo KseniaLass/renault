@@ -39,7 +39,7 @@ gulp.task('serve', () => runSequence('serve:clean', 'serve:start'));
 gulp.task('dist', () => runSequence('dist:clean', 'dist:build', 'web', () => {
 	open('http://localhost:' + PORT)
 }));
-gulp.task('build', () => runSequence('dist:clean', 'dist:build'));
+gulp.task('auto-build', () => runSequence('dist:clean', 'dist:build'));
 gulp.task('clean', ['dist:clean, serve:clean']);
 gulp.task('open', () => open('http://localhost:' + PORT));
 
