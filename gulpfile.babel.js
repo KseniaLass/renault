@@ -12,7 +12,7 @@ import buffer from "vinyl-buffer";
 import gulpLoadPlugins from "gulp-load-plugins";
 import packageJson from "./package.json";
 import runSequence from "run-sequence";
-import optipng from "imagemin-optipng"
+import optipng from "imagemin-optipng";
 
 import browserSync from "browser-sync";
 let reload = browserSync.reload;
@@ -36,7 +36,9 @@ var sassConfig = {
 
 // Main Tasks
 gulp.task('serve', () => runSequence('serve:clean', 'serve:start'));
-gulp.task('dist', () => runSequence('dist:clean', 'dist:build'));
+gulp.task('dist', () => runSequence('dist:clean', 'dist:build', () => {
+	open('http://localhost:' + PORT)
+}));
 gulp.task('clean', ['dist:clean, serve:clean']);
 gulp.task('open', () => open('http://localhost:' + PORT));
 
@@ -61,7 +63,7 @@ gulp.task('serve:sass', () => {
 });
 
 gulp.task('dist:sass', () => {
-	return gulp.src(sassConfig.sassPath + '/style.scss')
+	return gulp.src(sassConfig.sassPath + '/*.scss')
 		.pipe($.sourcemaps.init())
 		.pipe($.sass({
 			outputStyle: 'compressed'
@@ -101,9 +103,7 @@ gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'watch', '
 	console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'web-bs'], () => {
-	console.log(browserifyConfig.entryFile);
-});
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'lint', 'web']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
@@ -119,6 +119,13 @@ gulp.task('serve:images', () => {
 	return gulp.src([SOURCES_DIR +'/img/**/*'])
 		.pipe($.changed(PUBLIC_DIR + '/img/'))
 		.pipe(gulp.dest(PUBLIC_DIR + '/img/'));
+});
+
+gulp.task('lint', () => {
+	return gulp.src(SOURCES_DIR + '/js/**/*.js')
+		.pipe($.eslint())
+		.pipe($.eslint.format());
+		//.pipe($.eslint.failAfterError())
 });
 
 
@@ -144,9 +151,6 @@ let checkIfBundleExists = (filename, array) => {
 
 	return result;
 };
-
-/// todo: Написана ф-ция проверки, если бандл уже записан в массив. Реализовать дополнение новыми бандлами, подключить вотчер.
-/// todo: Написать обработку бандлов и компиляцию. Подумать о конкатенации.
 
 
 let checkJsBundles = () => {
@@ -313,7 +317,5 @@ gulp.task('watch', () => {
 	gulp.watch(['*.jade'], {cwd: SOURCES_DIR + '/'}, ['serve:jade']);
 	gulp.watch(['img/**/*.svg', 'img/**/*.jpg', 'img/**/*.jpeg', 'img/**/*.png', 'img/**/*.bmp'], {cwd: SOURCES_DIR + '/'}, ['serve:images']);
 	//gulp.watch([SOURCES_DIR + '/js/*.js'], ['serve:js']);
-	//gulp.watch([SOURCES_DIR + '/css/*.scss'], ['serve:sass']);
-	//gulp.watch([SOURCES_DIR + '/css/*.scss'], ['serve:sass']);
 	//gulp.watch([SOURCES_DIR + '/css/*.scss'], ['serve:sass']);
 });
