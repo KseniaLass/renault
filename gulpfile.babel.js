@@ -36,9 +36,10 @@ var sassConfig = {
 
 // Main Tasks
 gulp.task('serve', () => runSequence('serve:clean', 'serve:start'));
-gulp.task('dist', () => runSequence('dist:clean', 'dist:build', () => {
+gulp.task('dist', () => runSequence('dist:clean', 'dist:build', 'web', () => {
 	open('http://localhost:' + PORT)
 }));
+gulp.task('build', () => runSequence('dist:clean', 'dist:build'));
 gulp.task('clean', ['dist:clean, serve:clean']);
 gulp.task('open', () => open('http://localhost:' + PORT));
 
@@ -103,7 +104,7 @@ gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'watch', '
 	console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'lint', 'web']);
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'lint']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
