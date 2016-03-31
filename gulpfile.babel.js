@@ -100,11 +100,11 @@ gulp.task('dist:jade', () => {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'watch', 'web-bs'], () => {
+gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'serve:static', 'watch', 'web-bs'], () => {
 	console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'lint']);
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
@@ -117,9 +117,20 @@ gulp.task('dist:images', () => {
 });
 
 gulp.task('serve:images', () => {
-	return gulp.src([SOURCES_DIR +'/img/**/*'])
+	return gulp.src([SOURCES_DIR + '/img/**/*'])
 		.pipe($.changed(PUBLIC_DIR + '/img/'))
 		.pipe(gulp.dest(PUBLIC_DIR + '/img/'));
+});
+
+gulp.task('serve:static', () => {
+	return gulp.src([SOURCES_DIR + '/static/**/*'])
+		.pipe($.changed(PUBLIC_DIR + '/'))
+		.pipe(gulp.dest(PUBLIC_DIR + '/'))
+});
+
+gulp.task('dist:static', () => {
+	return gulp.src([SOURCES_DIR + '/static/**/*'])
+		.pipe(gulp.dest(PUBLIC_DIR + '/'))
 });
 
 gulp.task('lint', () => {
@@ -185,6 +196,8 @@ let checkJsBundles = () => {
 };
 
 let genJsBundles = (arr, entriesStorage = browserifyConfig.entryFile) => {
+	let i = 0;
+
 	arr.forEach((el) => {
 
 		entriesStorage[el.fileName] = {
@@ -192,7 +205,12 @@ let genJsBundles = (arr, entriesStorage = browserifyConfig.entryFile) => {
 			filePath: SOURCES_DIR + '/js/',
 			bundleName: el.fileName + '.bundle' + el.fileExt
 		};
+
+		bundle(el.fileName);
+		i++;
 	});
+
+	console.log('Added ' + i + ' new bundles');
 
 	return entriesStorage;
 };
@@ -212,6 +230,8 @@ let browserifyConfig = {
 
 let getBundler = () => {
 
+	//console.log('Get bundlers exec');
+
 	let res = checkJsBundles();
 	let bundlesList = browserifyConfig.entryFile;
 
@@ -221,6 +241,7 @@ let getBundler = () => {
 
 
 			if (typeof bundlers[i] === 'undefined') {
+				console.log('Cannot find ' + bundlesList[i].fileName + ' bundle! Creating...');
 				bundlers[i] = {};
 				let bundler = watchify(browserify(bundlesList[i].filePath + bundlesList[i].fileName, _.extend({debug: true}, watchify.args)));
 				//console.log(bundler);
@@ -239,7 +260,12 @@ let bundle = (name = null) => {
 
 	let b = getBundler();
 
+	//console.log('Actual count of bundlers: ', b.length);
+
 	if (name) {
+
+		//console.log('creating bundle (by one) >>> ', b[name].name);
+
 		b[name].bundler
 			.transform(babelify)
 			.bundle()
@@ -255,6 +281,8 @@ let bundle = (name = null) => {
 
 	for (let key in b) {
 		if (b.hasOwnProperty(key)) {
+
+			//console.log('creating ALL bundles >>> ', b[key].name);
 
 			b[key].bundler
 				.transform(babelify)
@@ -316,6 +344,7 @@ gulp.task('web', () => {
 gulp.task('watch', () => {
 	gulp.watch(['css/*.scss'], {cwd: SOURCES_DIR + '/'}, ['serve:sass']);
 	gulp.watch(['*.jade'], {cwd: SOURCES_DIR + '/'}, ['serve:jade']);
+	gulp.watch(['static/**'], {cwd: SOURCES_DIR + '/'}, ['serve:static']);
 	gulp.watch(['img/**/*.svg', 'img/**/*.jpg', 'img/**/*.jpeg', 'img/**/*.png', 'img/**/*.bmp'], {cwd: SOURCES_DIR + '/'}, ['serve:images']);
 	//gulp.watch([SOURCES_DIR + '/js/*.js'], ['serve:js']);
 	//gulp.watch([SOURCES_DIR + '/css/*.scss'], ['serve:sass']);
