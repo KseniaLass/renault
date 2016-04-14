@@ -46,10 +46,6 @@ node_modules/
 # frontend #
 ######################
 
-/public/js/**/*
-/public/css/**/*
-/sources/img/__local
-/public/img/
-/public/*.html
+/public
 /.sass-cache
 /bower_components
