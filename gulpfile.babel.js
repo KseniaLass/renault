@@ -43,8 +43,6 @@ gulp.task('auto-build', () => runSequence('dist:clean', 'dist:build'));
 gulp.task('clean', ['dist:clean, serve:clean']);
 gulp.task('open', () => open('http://localhost:' + PORT));
 
-//gulp.task('serve:start')
-
 // Remove all built files
 gulp.task('serve:clean', cb => del([PUBLIC_DIR + '/*', '!' + PUBLIC_DIR + '/.gitkeep'], {dot: true}, cb));
 gulp.task('dist:clean', cb => del([PUBLIC_DIR + '/*', '!' + PUBLIC_DIR + '/.gitkeep'], {dot: true}, cb));
