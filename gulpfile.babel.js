@@ -99,10 +99,10 @@ gulp.task('dist:jade', () => {
 });
 
 gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'serve:static', 'watch', 'web-bs'], () => {
-	console.log(browserifyConfig.entryFile);
+	// console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint']);
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint', 'build-once']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
@@ -143,168 +143,83 @@ gulp.task('lint', () => {
 
 // browserify
 
-// Misc Functions
-let bundlers = {};
-let checkIfBundleExists = (filename, array) => {
-	let result = false;
+import config from './config.json';
+let bundler = config.bundler;
 
-	for (let i in array) {
+console.log(bundler);
 
-		if (array.hasOwnProperty(i)) {
-			if (array[i].fileName === filename) {
-				result = true;
-				break;
+function initBundles(bundler, watch){
+
+	for (let i in bundler) {
+
+		if (bundler.hasOwnProperty(i)) {
+
+			if (bundler[i].bundler){
+				return false;
 			}
+
+			bundler[i].bundler = watchify(browserify(bundler[i].filepath + bundler[i].filename, { debug: true }).transform(babelify));
+
+			// if (bundler[i].filename === filename) {
+			//
+			// 	break;
+			// }
+
+			if (watch){
+				bundler[i].bundler.on('update', () => {
+					console.log(`Bundling ${bundler[i].bundlename}...`);
+					let timeStart = new Date().getTime();
+					makeBundle(i, bundler[i].bundlename, () => {
+						let timeFinish = new Date().getTime();
+						console.log(`Success >> bundling ${bundler[i].bundlename} in ${timeFinish - timeStart}ms`);
+					});
+				});
+			}
+
+			makeBundle(i, bundler[i].bundlename);
 		}
 
 	}
+}
 
-	return result;
-};
+function makeBundle(name, bundlename, cb){
 
-
-let checkJsBundles = () => {
-	let p = SOURCES_DIR + '/js/';
-	let newFiles = [];
-
-	var files = fs.readdirSync(p);
-
-	files.map((file) => {
-		return path.join(p, file)
-	}).filter((file) => {
-		return fs.statSync(file).isFile();
-	}).forEach((file) => {
-		let exists = checkIfBundleExists(path.basename(file), browserifyConfig.entryFile);
-
-		if (!exists) {
-			newFiles.push({
-				fileName: path.basename(file, path.extname(file)),
-				fileExt: path.extname(file)
-			});
+		if (typeof bundler[name] === "undefined"){
+			console.error(`ERROR: can't find bundle ${name}`);
+			return false;
 		}
 
-		//console.log("%s (%s)", file, path.extname(file), exists);
-	});
-
-	console.log('new::: ', newFiles);
-
-
-	return (newFiles.length ? genJsBundles(newFiles) : false);
-
-};
-
-let genJsBundles = (arr, entriesStorage = browserifyConfig.entryFile) => {
-	let i = 0;
-
-	arr.forEach((el) => {
-
-		entriesStorage[el.fileName] = {
-			fileName: el.fileName + el.fileExt,
-			filePath: SOURCES_DIR + '/js/',
-			bundleName: el.fileName + '.bundle' + el.fileExt
-		};
-
-		bundle(el.fileName);
-		i++;
-	});
-
-	console.log('Added ' + i + ' new bundles');
-
-	return entriesStorage;
-};
-
-let browserifyConfig = {
-		entryFile: {
-			main: {
-				fileName: 'main.js',
-				filePath: SOURCES_DIR + '/js/',
-				bundleName: 'main.bundle.js'
-			}
-		},
-
-		outputDir: PUBLIC_DIR + '/js/'
-	}
-	;
-
-let getBundler = () => {
-
-	//console.log('Get bundlers exec');
-
-	let res = checkJsBundles();
-	let bundlesList = browserifyConfig.entryFile;
-
-	for (let i in bundlesList) {
-		if (bundlesList.hasOwnProperty(i)) {
-			//console.log(bundlers, i);
-
-
-			if (typeof bundlers[i] === 'undefined') {
-				console.log('Cannot find ' + bundlesList[i].fileName + ' bundle! Creating...');
-				bundlers[i] = {};
-				let bundler = watchify(browserify(bundlesList[i].filePath + bundlesList[i].fileName, _.extend({debug: true}, watchify.args)));
-				//console.log(bundler);
-
-				bundlers[i].bundler = bundler;
-				bundlers[i].name = i;
-			}
-
-		}
-	}
-
-	return bundlers;
-};
-
-let bundle = (name = null) => {
-
-	let b = getBundler();
-
-	//console.log('Actual count of bundlers: ', b.length);
-
-	if (name) {
-
-		//console.log('creating bundle (by one) >>> ', b[name].name);
-
-		b[name].bundler
-			.transform(babelify)
-			.bundle()
-			.on('error', function (err) {
-				console.log('Error: ' + err.message);
+		bundler[name].bundler.bundle()
+			.on('error', function(err) { console.error(err); this.emit('end'); })
+			.on('end', function(){
+				if (typeof cb === "function"){
+					cb();
+				}
 			})
-			.pipe(source(browserifyConfig.entryFile[b[name].name].bundleName))
-			.pipe(gulp.dest(browserifyConfig.outputDir))
+			.pipe(source(bundlename))
+			.pipe(buffer())
+			.pipe($.sourcemaps.init({ loadMaps: true }))
+			.pipe($.sourcemaps.write('./'))
+			.pipe(gulp.dest(PUBLIC_DIR + '/js/'))
 			.pipe(reload({stream: true}));
 
-		return b;
-	}
+}
 
-	for (let key in b) {
-		if (b.hasOwnProperty(key)) {
+function getBundle(){
 
-			//console.log('creating ALL bundles >>> ', b[key].name);
+}
 
-			b[key].bundler
-				.transform(babelify)
-				.bundle()
-				.on('error', function (err) {
-					console.log('Error: ' + err.message);
-				})
-				.pipe(source(browserifyConfig.entryFile[b[key].name].bundleName))
-				.pipe(gulp.dest(browserifyConfig.outputDir))
-				.pipe(reload({stream: true}));
-
-		}
-	}
-
-	return b;
-
-};
 
 gulp.task('js-clean', (cb) => {
-	rimraf(browserifyConfig.outputDir, cb);
+	rimraf(PUBLIC_DIR + '/js/', cb);
+});
+
+gulp.task('build-once', ['js-clean'], () => {
+	return initBundles(bundler, false);
 });
 
 gulp.task('build-persistent', ['js-clean'], () => {
-	return bundle();
+	return initBundles(bundler, true);
 });
 
 gulp.task('build', ['build-persistent'], () => {
@@ -319,15 +234,7 @@ gulp.task('web-bs', ['build-persistent'], () => {
 		}
 	});
 
-	let b = getBundler();
-
-	for (let key in b) {
-		if (b.hasOwnProperty(key)) {
-			b[key].bundler.on('update', function () {
-				bundle(key);
-			});
-		}
-	}
+	return initBundles(bundler, true);
 });
 
 // WEB SERVER
@@ -340,8 +247,8 @@ gulp.task('web', () => {
 });
 
 gulp.task('watch', () => {
-	gulp.watch(['css/*.scss'], {cwd: SOURCES_DIR + '/'}, ['serve:sass']);
-	gulp.watch(['*.jade'], {cwd: SOURCES_DIR + '/'}, ['serve:jade']);
+	gulp.watch(['css/**'], {cwd: SOURCES_DIR + '/'}, ['serve:sass']);
+	gulp.watch(['*.jade', 'layout/**/*.jade'], {cwd: SOURCES_DIR + '/'}, ['serve:jade']);
 	gulp.watch(['static/**'], {cwd: SOURCES_DIR + '/'}, ['serve:static']);
 	gulp.watch(['img/**/*.svg', 'img/**/*.jpg', 'img/**/*.jpeg', 'img/**/*.png', 'img/**/*.bmp'], {cwd: SOURCES_DIR + '/'}, ['serve:images']);
 	//gulp.watch([SOURCES_DIR + '/js/*.js'], ['serve:js']);
