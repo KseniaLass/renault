@@ -135,7 +135,7 @@ gulp.task('lint', () => {
 	return gulp.src(SOURCES_DIR + '/js/**/*.js')
 		.pipe($.eslint())
 		.pipe($.eslint.format());
-		//.pipe($.eslint.failAfterError())
+	//.pipe($.eslint.failAfterError())
 });
 
 
@@ -184,24 +184,24 @@ function initBundles(bundler, watch){
 
 function makeBundle(name, bundlename, cb){
 
-		if (typeof bundler[name] === "undefined"){
-			console.error(`ERROR: can't find bundle ${name}`);
-			return false;
-		}
+	if (typeof bundler[name] === "undefined"){
+		console.error(`ERROR: can't find bundle ${name}`);
+		return false;
+	}
 
-		bundler[name].bundler.bundle()
-			.on('error', function(err) { console.error(err); this.emit('end'); })
-			.on('end', function(){
-				if (typeof cb === "function"){
-					cb();
-				}
-			})
-			.pipe(source(bundlename))
-			.pipe(buffer())
-			.pipe($.sourcemaps.init({ loadMaps: true }))
-			.pipe($.sourcemaps.write('./'))
-			.pipe(gulp.dest(PUBLIC_DIR + '/js/'))
-			.pipe(reload({stream: true}));
+	bundler[name].bundler.bundle()
+		.on('error', function(err) { console.error(err); this.emit('end'); })
+		.on('end', function(){
+			if (typeof cb === "function"){
+				cb();
+			}
+		})
+		.pipe(source(bundlename))
+		.pipe(buffer())
+		.pipe($.sourcemaps.init({ loadMaps: true }))
+		.pipe($.sourcemaps.write('./'))
+		.pipe(gulp.dest(PUBLIC_DIR + '/js/'))
+		.pipe(reload({stream: true}));
 
 }
 
