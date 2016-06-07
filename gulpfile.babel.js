@@ -12,6 +12,8 @@ import buffer from "vinyl-buffer";
 import gulpLoadPlugins from "gulp-load-plugins";
 import packageJson from "./package.json";
 import runSequence from "run-sequence";
+import minify from "gulp-minify";
+import concat from "gulp-concat";
 import optipng from "imagemin-optipng";
 
 import browserSync from "browser-sync";
@@ -31,6 +33,10 @@ const SOURCES_DIR = './sources';
 var sassConfig = {
 	sassPath: './' + SOURCES_DIR + '/css',
 	bowerDir: './bower_components'
+};
+
+var jsConfig = {
+	vendorPath: SOURCES_DIR + '/js/vendor'
 };
 
 
@@ -86,6 +92,16 @@ gulp.task('serve:jade', () => {
 		.pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('serve:vendor-js', () => {
+	return gulp.src(jsConfig.vendorPath + '/*.js')
+		.pipe(concat('vendor.js'))
+		.on('error', $.notify.onError(function(error) {
+			return 'Error: ' + error.message;
+		}))
+		.pipe(gulp.dest(PUBLIC_DIR + '/js'))
+		.pipe(browserSync.reload({stream: true}));
+});
+
 gulp.task('dist:jade', () => {
 	return gulp.src(SOURCES_DIR + '/*.jade')
 		.pipe($.jade({
@@ -98,11 +114,31 @@ gulp.task('dist:jade', () => {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'serve:static', 'watch', 'web-bs'], () => {
+gulp.task('dist:vendor-js', () => {
+	return gulp.src(jsConfig.vendorPath + '/*.js')
+		.pipe(concat('vendor.js')
+			.on('error', $.notify.onError(function (error) {
+				return 'Error: ' + error.message;
+			}))
+		)
+		.pipe(minify({
+				ext:{
+					min:'.js'
+				},
+				noSource: true
+			})
+			.on('error', $.notify.onError(function (error) {
+				return 'Error: ' + error.message;
+			}))
+		)
+		.pipe(gulp.dest(PUBLIC_DIR + '/js'));
+});
+
+gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'serve:vendor-js', 'serve:static', 'watch', 'web-bs'], () => {
 	// console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint', 'build-once']);
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint', 'build-once', 'dist:vendor-js']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
