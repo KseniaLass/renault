@@ -12,8 +12,6 @@ import buffer from "vinyl-buffer";
 import gulpLoadPlugins from "gulp-load-plugins";
 import packageJson from "./package.json";
 import runSequence from "run-sequence";
-import minify from "gulp-minify";
-import concat from "gulp-concat";
 import optipng from "imagemin-optipng";
 import inject from "gulp-inject";
 
@@ -95,7 +93,7 @@ gulp.task('serve:jade', () => {
 
 gulp.task('serve:vendor-js', () => {
 	return gulp.src(jsConfig.vendorPath + '/*.js')
-		.pipe(concat('vendor.js'))
+		.pipe($.concat('vendor.js'))
 		.on('error', $.notify.onError(function(error) {
 			return 'Error: ' + error.message;
 		}))
@@ -117,12 +115,12 @@ gulp.task('dist:jade', () => {
 
 gulp.task('dist:vendor-js', () => {
 	return gulp.src(jsConfig.vendorPath + '/*.js')
-		.pipe(concat('vendor.js')
+		.pipe($.concat('vendor.js')
 			.on('error', $.notify.onError(function (error) {
 				return 'Error: ' + error.message;
 			}))
 		)
-		.pipe(minify({
+		.pipe($.minify({
 				ext:{
 					min:'.js'
 				},
