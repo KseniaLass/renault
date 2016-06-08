@@ -15,6 +15,7 @@ import runSequence from "run-sequence";
 import minify from "gulp-minify";
 import concat from "gulp-concat";
 import optipng from "imagemin-optipng";
+import inject from "gulp-inject";
 
 import browserSync from "browser-sync";
 let reload = browserSync.reload;
@@ -41,8 +42,8 @@ var jsConfig = {
 
 
 // Main Tasks
-gulp.task('serve', () => runSequence('serve:clean', 'serve:start'));
-gulp.task('dist', () => runSequence('dist:clean', 'dist:build', 'web', () => {
+gulp.task('serve', () => runSequence('serve:clean', 'serve:start', 'indexGenerate'));
+gulp.task('dist', () => runSequence('dist:clean', 'dist:build', 'web', 'indexGenerate', () => {
 	open('http://localhost:' + PORT)
 }));
 gulp.task('auto-build', () => runSequence('dist:clean', 'dist:build'));
@@ -174,6 +175,29 @@ gulp.task('lint', () => {
 	//.pipe($.eslint.failAfterError())
 });
 
+
+// ----------------------------------------------------------------------------
+
+// Inject plugin --> generate index.html file
+
+gulp.task('indexGenerate', () => {
+	return gulp.src(PUBLIC_DIR + '/index.html')
+				.pipe($.inject(
+					gulp.src([PUBLIC_DIR + '/*.html'], {read:false}), {
+						transform: function(filepath){
+							if(filepath.slice(-5) === '.html'){
+								var regName = /(\/public\/)|(\.html)/gi,
+									fileName = filepath.replace(regName, ''),
+									cleanPath = fileName + '.html';
+
+								return '<li class="list__item"><a href="' + cleanPath + '" class="list__link">' + fileName + '</a></li>';
+							}
+							return inject.transform.apply(inject.transform, arguments);
+						}
+					}
+				))
+				.pipe(gulp.dest(PUBLIC_DIR))
+});
 
 // ----------------------------------------------------------------------------
 
