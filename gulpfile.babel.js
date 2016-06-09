@@ -179,7 +179,7 @@ gulp.task('lint', () => {
 // Inject plugin --> generate index.html file
 
 gulp.task('indexGenerate', () => {
-	return gulp.src(PUBLIC_DIR + '/index.html')
+	return gulp.src(PUBLIC_DIR + '/_pages.html')
 				.pipe($.inject(
 					gulp.src([PUBLIC_DIR + '/*.html'], {read:false}), {
 						transform: function(filepath){
