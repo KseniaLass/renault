@@ -79,9 +79,9 @@ gulp.task('dist:sass', () => {
 		.pipe(browserSync.reload({stream: true}))
 });
 
-gulp.task('serve:jade', () => {
-	return gulp.src(SOURCES_DIR + '/*.jade')
-		.pipe($.jade({
+gulp.task('serve:pug', () => {
+	return gulp.src(SOURCES_DIR + '/*.pug')
+		.pipe($.pug({
 			pretty: true
 		}).on('error', $.notify.onError(function (error) {
 			return 'Error: ' + error.message;
@@ -101,9 +101,9 @@ gulp.task('serve:vendor-js', () => {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('dist:jade', () => {
-	return gulp.src(SOURCES_DIR + '/*.jade')
-		.pipe($.jade({
+gulp.task('dist:pug', () => {
+	return gulp.src(SOURCES_DIR + '/*.pug')
+		.pipe($.pug({
 			pretty: true
 		}).on('error', $.notify.onError(function (error) {
 			return 'Error: ' + error.message;
@@ -133,11 +133,11 @@ gulp.task('dist:vendor-js', () => {
 		.pipe(gulp.dest(PUBLIC_DIR + '/js'));
 });
 
-gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:jade', 'serve:vendor-js', 'serve:static', 'watch', 'web-bs'], () => {
+gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:pug', 'serve:vendor-js', 'serve:static', 'watch', 'web-bs'], () => {
 	// console.log(browserifyConfig.entryFile);
 });
 
-gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:jade', 'dist:static', 'lint', 'build-once', 'dist:vendor-js']);
+gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:pug', 'dist:static', 'lint', 'build-once', 'dist:vendor-js']);
 
 gulp.task('dist:images', () => {
 	return gulp.src([SOURCES_DIR + '/img/**/*'])
@@ -306,7 +306,7 @@ gulp.task('web', () => {
 
 gulp.task('watch', () => {
 	gulp.watch(['css/**'], {cwd: SOURCES_DIR + '/'}, ['serve:sass']);
-	gulp.watch(['*.jade', 'layout/**/*.jade'], {cwd: SOURCES_DIR + '/'}, ['serve:jade']);
+	gulp.watch(['*.pug', 'layout/**/*.pug'], {cwd: SOURCES_DIR + '/'}, ['serve:pug']);
 	gulp.watch(['static/**'], {cwd: SOURCES_DIR + '/'}, ['serve:static']);
 	gulp.watch(['img/**/*.svg', 'img/**/*.jpg', 'img/**/*.jpeg', 'img/**/*.png', 'img/**/*.bmp'], {cwd: SOURCES_DIR + '/'}, ['serve:images']);
 	//gulp.watch([SOURCES_DIR + '/js/*.js'], ['serve:js']);
