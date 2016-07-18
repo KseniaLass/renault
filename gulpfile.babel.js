@@ -126,9 +126,9 @@ gulp.task('dist:vendor-js', () => {
 				},
 				noSource: true
 			})
-			.on('error', $.notify.onError(function (error) {
-				return 'Error: ' + error.message;
-			}))
+				.on('error', $.notify.onError(function (error) {
+					return 'Error: ' + error.message;
+				}))
 		)
 		.pipe(gulp.dest(PUBLIC_DIR + '/js'));
 });
@@ -180,21 +180,21 @@ gulp.task('lint', () => {
 
 gulp.task('indexGenerate', () => {
 	return gulp.src(PUBLIC_DIR + '/_pages.html')
-				.pipe($.inject(
-					gulp.src([PUBLIC_DIR + '/*.html'], {read:false}), {
-						transform: function(filepath){
-							if(filepath.slice(-5) === '.html'){
-								var regName = /(\/public\/)|(\.html)/gi,
-									fileName = filepath.replace(regName, ''),
-									cleanPath = fileName + '.html';
+		.pipe($.inject(
+			gulp.src([PUBLIC_DIR + '/*.html'], {read:false}), {
+				transform: function(filepath){
+					if(filepath.slice(-5) === '.html'){
+						var regName = /(\/public\/)|(\.html)/gi,
+							fileName = filepath.replace(regName, ''),
+							cleanPath = fileName + '.html';
 
-								return '<li class="list__item"><a href="' + cleanPath + '" class="list__link">' + fileName + '</a></li>';
-							}
-							return inject.transform.apply(inject.transform, arguments);
-						}
+						return '<li class="list__item"><a href="' + cleanPath + '" class="list__link">' + fileName + '</a></li>';
 					}
-				))
-				.pipe(gulp.dest(PUBLIC_DIR))
+					return inject.transform.apply(inject.transform, arguments);
+				}
+			}
+		))
+		.pipe(gulp.dest(PUBLIC_DIR))
 });
 
 // ----------------------------------------------------------------------------
@@ -216,23 +216,30 @@ function initBundles(bundler, watch){
 				return false;
 			}
 
-			bundler[i].bundler = watchify(browserify(bundler[i].filepath + bundler[i].filename, { debug: true }).transform(babelify));
+			// bundler[i].bundler = watchify(browserify(bundler[i].filepath + bundler[i].filename, { debug: true }).transform(babelify));
 
-			// if (bundler[i].filename === filename) {
-			//
-			// 	break;
+			bundler[i].bundler = browserify({
+				entries: [bundler[i].filepath + bundler[i].filename],
+				cache: {},
+				packageCache: {},
+				poll: false,
+				debug: true
+			}).transform(babelify);
+
+			bundler[i].bundler.on('update', () => {
+				console.log('update triggered');
+			});
+
+			// if (watch){
+			// 	bundler[i].bundler.on('update', () => {
+			// 		console.log(`Bundling ${bundler[i].bundlename}...`);
+			// 		let timeStart = new Date().getTime();
+			// 		makeBundle(i, bundler[i].bundlename, () => {
+			// 			let timeFinish = new Date().getTime();
+			// 			console.log(`Success >> bundling ${bundler[i].bundlename} in ${timeFinish - timeStart}ms`);
+			// 		});
+			// 	});
 			// }
-
-			if (watch){
-				bundler[i].bundler.on('update', () => {
-					console.log(`Bundling ${bundler[i].bundlename}...`);
-					let timeStart = new Date().getTime();
-					makeBundle(i, bundler[i].bundlename, () => {
-						let timeFinish = new Date().getTime();
-						console.log(`Success >> bundling ${bundler[i].bundlename} in ${timeFinish - timeStart}ms`);
-					});
-				});
-			}
 
 			makeBundle(i, bundler[i].bundlename);
 		}
@@ -263,10 +270,19 @@ function makeBundle(name, bundlename, cb){
 
 }
 
-function getBundle(){
+gulp.task('js-build', () => {
+	for (let i in bundler){
+		if (bundler.hasOwnProperty(i)){
 
-}
-
+			console.log(`Bundling ${bundler[i].bundlename}...`);
+			let timeStart = new Date().getTime();
+			makeBundle(i, bundler[i].bundlename, () => {
+				let timeFinish = new Date().getTime();
+				console.log(`Success >> bundling ${bundler[i].bundlename} in ${timeFinish - timeStart}ms`);
+			});
+		}
+	}
+})
 
 gulp.task('js-clean', (cb) => {
 	rimraf(PUBLIC_DIR + '/js/', cb);
@@ -306,6 +322,7 @@ gulp.task('web', () => {
 
 gulp.task('watch', () => {
 	gulp.watch(['css/**'], {cwd: SOURCES_DIR + '/'}, ['serve:sass']);
+	gulp.watch(['js/**'], {cwd: SOURCES_DIR + '/'}, ['js-build']);
 	gulp.watch(['*.pug', 'layout/**/*.pug'], {cwd: SOURCES_DIR + '/'}, ['serve:pug']);
 	gulp.watch(['static/**'], {cwd: SOURCES_DIR + '/'}, ['serve:static']);
 	gulp.watch(['img/**/*.svg', 'img/**/*.jpg', 'img/**/*.jpeg', 'img/**/*.png', 'img/**/*.bmp'], {cwd: SOURCES_DIR + '/'}, ['serve:images']);
