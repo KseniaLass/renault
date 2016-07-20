@@ -1,8 +1,6 @@
 block vars
 
 doctype html
-<!--[if IE 6]><html class="ie6"><![endif]-->
-<!--[if IE 7]><html class="ie7"><![endif]-->
 <!--[if IE 8]><html class="ie8"><![endif]-->
 <!--[if gt IE 8]><html><![endif]-->
 html
@@ -11,8 +9,6 @@ html
 		meta(name='viewport', content='width=device-width')/
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')/
 		link(rel='stylesheet', href='/css/style.css')/
-		if(pageTemplate == 'index')
-			link(rel='stylesheet', href='/css/index.css')/
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
 		//script(src='/js/require.js')
 		title HTML Page
@@ -24,3 +20,4 @@ html
 				block content
 
 		script(src='/js/custom.js')
+		//script(src='/js/vendor.js')
