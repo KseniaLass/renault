@@ -1,6 +1,6 @@
 {
   "name": "sandbox-es6",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Boilerplate for es6-projects",
   "main": "gulpfile.js",
   "scripts": {
