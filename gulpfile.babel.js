@@ -1,8 +1,6 @@
 'use strict';
 
 import del from "del";
-import fs from "fs";
-import path from "path";
 import gulp from "gulp";
 import open from "open";
 import rimraf from "rimraf";
@@ -12,14 +10,12 @@ import buffer from "vinyl-buffer";
 import gulpLoadPlugins from "gulp-load-plugins";
 import packageJson from "./package.json";
 import runSequence from "run-sequence";
-import optipng from "imagemin-optipng";
 import inject from "gulp-inject";
 
 import browserSync from "browser-sync";
 let reload = browserSync.reload;
 let bs = browserSync.create();
 
-import watchify from "watchify";
 import browserify from "browserify";
 import babelify from "babelify";
 
@@ -134,7 +130,7 @@ gulp.task('dist:vendor-js', () => {
 });
 
 gulp.task('serve:start', ['serve:sass', 'serve:images', 'serve:pug', 'serve:vendor-js', 'serve:static', 'watch', 'web-bs'], () => {
-	// console.log(browserifyConfig.entryFile);
+
 });
 
 gulp.task('dist:build', ['dist:sass', 'dist:images', 'dist:pug', 'dist:static', 'lint', 'build-once', 'dist:vendor-js']);
@@ -170,7 +166,6 @@ gulp.task('lint', () => {
 	return gulp.src(SOURCES_DIR + '/js/**/*.js')
 		.pipe($.eslint())
 		.pipe($.eslint.format());
-	//.pipe($.eslint.failAfterError())
 });
 
 
@@ -216,8 +211,6 @@ function initBundles(bundler, watch){
 				return false;
 			}
 
-			// bundler[i].bundler = watchify(browserify(bundler[i].filepath + bundler[i].filename, { debug: true }).transform(babelify));
-
 			bundler[i].bundler = browserify({
 				entries: [bundler[i].filepath + bundler[i].filename],
 				cache: {},
@@ -229,17 +222,6 @@ function initBundles(bundler, watch){
 			bundler[i].bundler.on('update', () => {
 				console.log('update triggered');
 			});
-
-			// if (watch){
-			// 	bundler[i].bundler.on('update', () => {
-			// 		console.log(`Bundling ${bundler[i].bundlename}...`);
-			// 		let timeStart = new Date().getTime();
-			// 		makeBundle(i, bundler[i].bundlename, () => {
-			// 			let timeFinish = new Date().getTime();
-			// 			console.log(`Success >> bundling ${bundler[i].bundlename} in ${timeFinish - timeStart}ms`);
-			// 		});
-			// 	});
-			// }
 
 			makeBundle(i, bundler[i].bundlename);
 		}
