@@ -49,3 +49,4 @@ node_modules/
 /public
 /.sass-cache
 /bower_components
+/yarn.lock
