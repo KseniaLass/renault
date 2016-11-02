@@ -1,0 +1,61 @@
+
+// Breakpoints
+$mobile-breakpoint: 640px;
+$tablet-breakpoint: 1024px;
+$desktop-breakpoint: 1360px;
+
+// Media
+$mobile: "screen and (max-width: 1024px)";
+$tablet: "screen and (min-width: 1025px) and (max-width: 1024px)";
+$desktop: "screen and (min-width: 1360px)";
+
+@include sgs-change('debug', true);
+@include add-grid(8);
+@include add-grid(12 at 1024px);
+@include add-grid(16 at 1360px);
+@include add-gutter(1/3);
+@include add-gutter-style('split');
+
+.wrapper {
+
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 100%;
+    @media #{$mobile} {
+      width: 605px;
+    }
+    @media #{$tablet} {
+      width: 922px;
+    }
+    @media #{$desktop} {
+      width: 1260px;
+    }
+    //@include background-grid;
+}
+
+.mobile-show {
+  display: none;
+  @media #{$mobile} {
+    display: block;
+  }
+}
+
+.tablet-show {
+  display: none;
+  @media #{$tablet} {
+    display: block;
+  }
+}
+
+.desktop-show {
+  display: none;
+  @media #{$desktop} {
+    display: block;
+  }
+}
+
+a {
+  text-decoration: none;
+}

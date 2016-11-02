@@ -1,0 +1,16 @@
+{
+  "name": "proplan-sm",
+  "version": "0.0.0",
+  "authors": [
+    "--"
+  ],
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "singularity": "^1.7.0"
+  },
+  "devDependencies": {
+    "breakpoint": "~4.6.4"
+  }
+}

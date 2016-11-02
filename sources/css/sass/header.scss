@@ -1,0 +1,204 @@
+.header-bar {
+  padding: 19px 0;
+  display: inline-block;
+  width: 100%;
+  .logo-link {
+    @include grid-span(3, 2);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(3, 1);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(3, 1);
+      img {
+        min-width:257px;
+      }
+    }
+    img {
+      height:100%;
+      width:100%;
+    }
+  }
+  .for-btn {
+    @include grid-span(2, 5);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(2, 4);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(2, 5);
+    }
+    a {
+      display: inline-block;
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 600;
+      height:38px;
+      width:100%;
+      line-height:38px;
+      text-align: center;
+      border: 1px solid rgba(39,39,39, .5);
+      border-radius: 6px;
+      text-decoration: none;
+      margin: 5% 0;
+      @include breakpoint($tablet-breakpoint) {
+        margin: 8% 0;
+      }
+    }
+  }
+  .mobile-button {
+    @include grid-span(1, 1);
+    padding:15px 0;
+    span {
+      width:50px;
+      height:4px;
+      display: block;
+      background: #272727;
+      margin-bottom: 5px;
+      border-radius: 6px;
+
+    }
+  }
+}
+
+.menu {
+  display: none;
+  background: #272727;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width:50%;
+  ul.navbar {
+    margin-left: 10px;
+    li {
+      display: block;
+      line-height: 48px;
+      a {
+        text-transform: uppercase;
+        font-size: 15px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        display: inline-block;
+        margin-right:20px;
+      }
+    }
+  }
+  @include breakpoint($tablet-breakpoint) {
+    display: block;
+    position: relative;
+    height: 48px;
+    width: 100%;
+    ul.navbar {
+      margin-left: 10px;
+      li {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.main-banner {
+  position: relative;
+  .sticker {
+    width: 161px;
+    border-radius: 0px 5px 5px 0px;
+    top: 108px;
+    left:0px;
+    padding: 20px;
+    position: absolute;
+    background-image: -moz-linear-gradient( 0deg, rgb(237,28,36) 0%, rgb(246,77,83) 37%, rgb(254,125,129) 58%, rgb(227,80,82) 81%, rgb(199,34,34) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgb(237,28,36) 0%, rgb(246,77,83) 37%, rgb(254,125,129) 58%, rgb(227,80,82) 81%, rgb(199,34,34) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgb(237,28,36) 0%, rgb(246,77,83) 37%, rgb(254,125,129) 58%, rgb(227,80,82) 81%, rgb(199,34,34) 100%);
+    span {
+      font-size: 15px;
+      color: rgb(255, 254, 254);
+      text-transform: uppercase;
+      line-height:1.5;
+    }
+  }
+  .banner-content {
+    padding-top: 20px;
+    display: inline-block;
+    width: 100%;
+    .cat {
+      background: url(../img/bg.jpg) no-repeat;
+      background-position: 50% 50%;
+      height:533px;
+      @include grid-span (8, 1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(12, 1);
+        background-position: 0% 50%;
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(8, 1);
+        margin-top: 60px;
+      }
+    }
+
+    .text-cont {
+      margin-top: -25px;
+      @include grid-span (8, 1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(12, 1);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(8, 9);
+        margin-top: 0px;
+      }
+      h1 {
+        span {
+          font-size: 36px;
+          font-weight: bold;
+          &.black {
+            color: #231f20;
+          }
+          &.red {
+            color: #ee1f27;
+          }
+        }
+      }
+      h4 {
+        font-size: 18px;
+        color: rgb(26, 23, 24);
+        text-transform: uppercase;
+        margin: 20px 0;
+      }
+      p {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+.collection {
+  position: relative;
+  height:300px;
+  @include breakpoint($desktop-breakpoint) {
+    margin-top: -190px;
+  }
+  .middle-line {
+    width: 100%;
+    height:14px;
+    background: #e0011c;
+    top: 50%;
+    margin-top: -7px;
+    position: absolute;
+    z-index:1;
+  }
+  .collection-pic {
+    height:300px;
+    padding: 30px 0;
+    background: url(../img/collection-pic.png) no-repeat;
+    background-position: 50% 50%;
+    position: relative;
+    z-index: 2;
+    @include grid-span (8, 1);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(12, 1);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(16, 1);
+    }
+  }
+}
+
