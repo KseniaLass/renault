@@ -1,122 +1,113 @@
 .article {
-  .for-scheme {
-    @include grid-span (8, 1);
-    @include breakpoint($tablet-breakpoint) {
-      @include grid-span(12, 1);
-    }
-    @include breakpoint($desktop-breakpoint) {
-      @include grid-span(16, 1);
-    }
-    .scheme {
-      border-top: 2px solid rgba(0, 0, 0, .1);
-      padding: 50px 0;
-      text-align: center;
-      @include grid-span (8, 1);
-      @include background-grid;
-      @include breakpoint($tablet-breakpoint) {
-        @include grid-span(12, 1);
-        clear:right;
-      }
-      @include breakpoint($desktop-breakpoint) {
-        @include grid-span(16, 1);
-      }
-      .big-pic {
-        @include grid-span(3, 1);
-        @include breakpoint($tablet-breakpoint) {
-          @include grid-span(4, 1);
-        }
-        @include breakpoint($desktop-breakpoint) {
-          @include grid-span(6, 1);
-        }
-        img {
-          max-width: 100%;
-        }
-      }
-      .plus {
-        @include grid-span(1, 4);
-        padding: 148px 0;
-        @include breakpoint($tablet-breakpoint) {
-          @include grid-span(2, 5);
-          padding: 198px 0;
-        }
-        @include breakpoint($desktop-breakpoint) {
-          @include grid-span(2, 7);
-        }
-      }
-      .small-pic {
-        @include grid-span(4, 5);
-        padding: 53px 0;
-        @include breakpoint($tablet-breakpoint) {
-          @include grid-span(6, 7);
-          padding: 96px 0;
-        }
-        @include breakpoint($desktop-breakpoint) {
-          @include grid-span(8, 9);
-          padding: 59px 0;
-          img {
-            width: 100%;
-          }
-        }
-        img {
-          max-width: 100%;
-        }
-      }
-      strong {
-        display: inline-block;
-        width: 100%;
-        font-size: 20px;
-        color: rgb(95, 40, 179);
-        text-transform: uppercase;
-      }
-    }
-    .attention {
-      @include grid-span(8, 1);
-      @include breakpoint($tablet-breakpoint) {
-        @include grid-span(12, 1);
-      }
-      @include breakpoint($desktop-breakpoint) {
-        @include grid-span(16, 1);
-      }
-      padding: 50px 0 30px;
-      position: relative;
-      text-align: left;
-      strong {
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        font-size: 30px;
-        color: $text-color;
-
-      }
-      .label {
-        background: rgb(170, 165, 212);
-        border-radius: 4px;
-        text-transform: uppercase;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        color: #fff;
-        font-size: 10px;
-        padding: 5px;
-      }
-      span {
-        font-size: 20px;
-      }
-    }
-  }
-
-  .article-block {
+  .scheme {
+    border-top: 2px solid rgba(0, 0, 0, .1);
+    padding: 50px 0;
+    text-align: center;
     @include grid-span (8, 1);
     @include background-grid;
     @include breakpoint($tablet-breakpoint) {
       @include grid-span(12, 1);
     }
     @include breakpoint($desktop-breakpoint) {
-      @include grid-span(18, 1);
+      @include grid-span(10, 1);
     }
+    .big-pic {
+      @include grid-span(3, 1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(4, 1);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(6, 1);
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+    .plus {
+      @include grid-span(1, 4);
+      padding: 148px 0;
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(2, 5);
+        padding: 198px 0;
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(2, 7);
+      }
+    }
+    .small-pic {
+      @include grid-span(4, 5);
+      padding: 53px 0;
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(6, 7);
+        padding: 96px 0;
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(8, 9);
+        padding: 59px 0;
+        img {
+          width: 100%;
+        }
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+    strong {
+      display: inline-block;
+      width: 100%;
+      font-size: 20px;
+      color: rgb(95, 40, 179);
+      text-transform: uppercase;
+    }
+  }
+
+  .attention {
+    @include grid-span(8, 1);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(12, 1);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(6, 11);
+      min-height:540px;
+    }
+    padding: 50px 0 30px;
+    position: relative;
+    text-align: left;
+    strong {
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-size: 30px;
+      color: $text-color;
+
+    }
+    .label {
+      background: rgb(170, 165, 212);
+      border-radius: 4px;
+      text-transform: uppercase;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      color: #fff;
+      font-size: 10px;
+      padding: 5px;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+
+  .art {
+    border: 2px solid #cdcdcd;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
     strong, span {
       display: inline-block;
-      width:100%;
-      margin-bottom:5px;
+      width: 100%;
+      margin-bottom: 5px;
     }
     strong {
       font-size: 30px;
@@ -128,28 +119,19 @@
       position: absolute;
       left: 30px;
       color: #fff;
-      font-size:10px;
+      font-size: 10px;
       padding: 5px;
       border-radius: 5px;
       text-transform: uppercase;
-      background:#3dac62;
+      background: #3dac62;
     }
-    .art {
-      border: 2px solid #cdcdcd;
-      background: #f8f8f8;
-      border-radius:5px;
-      margin-bottom:15px;
-      padding:20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .horizontal {
+    &.horizontal {
       @include background-grid($color: blue);
       .for-img {
         text-align: center;
       }
       .for-img, .for-text {
-        @include grid-span(8,1);
+        @include grid-span(8, 1);
         @include breakpoint($tablet-breakpoint) {
           @include grid-span(12, 1);
         }
@@ -158,10 +140,10 @@
         }
       }
     }
-    .vertical {
+    &.vertical {
       .for-text {
         padding: 40px 0 20px;
-        @include grid-span(5,1);
+        @include grid-span(5, 1);
         @include breakpoint($tablet-breakpoint) {
           @include grid-span(6, 1);
         }
@@ -171,7 +153,7 @@
       }
       .for-img {
         text-align: center;
-        @include grid-span(3,6);
+        @include grid-span(3, 6);
         @include breakpoint($tablet-breakpoint) {
           @include grid-span(6, 7);
         }
@@ -179,18 +161,8 @@
           @include grid-span(6, 11);
         }
       }
-
     }
-    .sterelize {
-      @include grid-span(8, 1);
-      @include breakpoint($tablet-breakpoint) {
-        @include grid-span(12, 1);
-      }
-      @include breakpoint($desktop-breakpoint) {
-        @include grid-span(4, 1);
-      }
-    }
-    .diet {
+    &.sterelize {
       @include grid-span(8, 1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(12, 1);
@@ -198,10 +170,15 @@
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(16, 1);
       }
-      //background: url(../img/dieta.png), #f8f8f8;
-      //background-repeat: no-repeat;
-      //background-position: 270% 100%;
-      //min-height: 337px;
+    }
+    &.diet {
+      @include grid-span(8, 1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(12, 1);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(16, 1);
+      }
 
       .for-img {
         min-height: 245px;
@@ -215,7 +192,7 @@
         background: #cd9135;
       }
     }
-    .sterelize-full {
+    &.sterelize-full {
       @include grid-span(8, 1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(12, 1);
@@ -223,9 +200,6 @@
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(16, 1);
       }
-      //background: url(../img/sterlize_full.png), #f8f8f8;
-      //background-repeat: no-repeat;
-      //background-position: 85% 50%;
     }
   }
 }
