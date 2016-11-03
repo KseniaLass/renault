@@ -1,0 +1,183 @@
+.tabs {
+  background: #ebebeb;
+  height:87px;
+  @include sgs-change('gutter styles', 'fixed');
+  @include breakpoint($tablet-breakpoint) {
+    height:75px;
+  }
+  ul {
+    margin: 0 10px;
+    li {
+      @include grid-span(8, 1);
+      @include sgs-change('output', 'float');
+
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(2.4, 1);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(3.2, 1);
+      }
+      text-align: center;
+      color: $text-color;
+      padding-top:10px;
+      padding-bottom: 10px;
+      position: relative;
+      display: none;
+      &.active {
+        display: inline-block;
+        background: $active-color;
+        color: #fff;
+        @include breakpoint($tablet-breakpoint) {
+          &:after {
+            content: '';
+            background: url(../img/bottom-arr.png) no-repeat;
+            width:23px;
+            height:6px;
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            margin-left: -3px;
+          }
+        }
+        strong {
+          &:after {
+            content: '';
+            background: url(../img/mobile-bottom-arr.png) no-repeat;
+            width: 16px;
+            height:14px;
+            position: absolute;
+            right: -30px;
+            top: 16px;
+            @include breakpoint($tablet-breakpoint) {
+              background: none;
+            }
+          }
+        }
+      }
+      @include breakpoint($tablet-breakpoint) {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: inline-block;
+      }
+      strong {
+        font-size: 30px;
+        text-transform: uppercase;
+        display: inline-block;
+        position: relative;
+        @include breakpoint($tablet-breakpoint) {
+          font-size: 14px;
+        }
+        @include breakpoint($desktop-breakpoint) {
+          font-size: 16px;
+        }
+      }
+      span {
+          font-size: 20px;
+          display: inline-block;
+          width: 100%;
+          @include breakpoint($tablet-breakpoint) {
+            font-size: 11px;
+          }
+          @include breakpoint($desktop-breakpoint) {
+            font-size: 12px;
+          }
+      }
+    }
+  }
+}
+
+.products {
+    .view-product {
+      padding-bottom: 30px;
+      @include sgs-change('gutter styles', 'split');
+      @include sgs-change('output', 'isolation');
+      @include grid-span (8, 1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(12, 1);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(8, 1);
+      }
+      h4 {
+        font-size: 30px;
+        color: $text-color;
+        font-weight:bold;
+        text-transform: uppercase;
+        padding: 35px 0;
+        @include breakpoint($desktop-breakpoint) {
+          font-size: 25px;
+          min-height:140px;
+        }
+      }
+      .for-img {
+        text-align: center;
+        @include breakpoint($desktop-breakpoint) {
+          text-align: left;
+        }
+        img {
+          width:50%;
+          max-width:277px;
+        }
+      }
+    }
+
+  .about-product {
+    margin-top: 35px;
+    padding-bottom: 30px;
+    @include grid-span(8,1);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(12, 1);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(8, 9);
+    }
+    p {
+      font-size: 24px;
+      margin-bottom: 15px;
+      @include breakpoint($tablet-breakpoint) {
+        font-size: 20px;
+      }
+      @include breakpoint($desktop-breakpoint) {
+        font-size: 16px;
+        min-height:60px;
+      }
+    }
+    .advans {
+      margin-top: 35px;
+      .advan {
+        position: relative;
+        margin-bottom: 20px;
+        .for-img {
+          position: absolute;
+          top: 50%;
+          margin-top: -34px;
+        }
+        .for-text {
+          border: 2px solid #eae7f5;
+          border-radius: 9px;
+          background: #eae7f5;
+          padding: 20px 40px;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          margin-left: 50px;
+          strong, span {
+            font-size: 18px;
+            display: inline-block;
+            width:100%;
+            @include breakpoint($tablet-breakpoint) {
+              font-size: 16px;
+            }
+            @include breakpoint($desktop-breakpoint) {
+              font-size: 14px;
+            }
+          }
+
+          strong {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+}

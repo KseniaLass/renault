@@ -9,6 +9,11 @@ $mobile: "screen and (max-width: 1024px)";
 $tablet: "screen and (min-width: 1025px) and (max-width: 1024px)";
 $desktop: "screen and (min-width: 1360px)";
 
+// Color
+$text-color: #1a1718;
+$active-color: #e0001b;
+
+
 @include sgs-change('debug', true);
 @include add-grid(8);
 @include add-grid(12 at 1024px);
@@ -17,6 +22,12 @@ $desktop: "screen and (min-width: 1360px)";
 @include add-gutter-style('split');
 
 .wrapper {
+
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 
 }
 
@@ -32,7 +43,9 @@ $desktop: "screen and (min-width: 1360px)";
     @media #{$desktop} {
       width: 1260px;
     }
-    //@include background-grid;
+    @include background-grid($color: green);
+    height:100%;
+    overflow: hidden;
 }
 
 .mobile-show {
