@@ -11,7 +11,7 @@ $desktop: "screen and (min-width: 1360px)";
 
 // Color
 $text-color: #1a1718;
-$active-color: #e0001b;
+$active-color: #ed1d25;
 
 
 @include sgs-change('debug', true);
@@ -20,14 +20,13 @@ $active-color: #e0001b;
 @include add-grid(16 at 1360px);
 @include add-gutter(1/3);
 @include add-gutter-style('split');
+@include sgs-change('output', 'float');
+
+* {
+  @include box-sizing(border-box);
+}
 
 .wrapper {
-
-}
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 
 }
 
@@ -35,16 +34,15 @@ $active-color: #e0001b;
     margin: 0 auto;
     max-width: 100%;
     @media #{$mobile} {
-      width: 605px;
+      min-width: 605px;
     }
     @media #{$tablet} {
-      width: 922px;
+      min-width: 922px;
     }
     @media #{$desktop} {
-      width: 1260px;
+      min-width: 1260px;
     }
-    @include background-grid($color: green);
-    height:100%;
+    //@include background-grid($color: green);
     overflow: hidden;
 }
 
@@ -71,4 +69,41 @@ $active-color: #e0001b;
 
 a {
   text-decoration: none;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  width:100%;
+  height:100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 99;
+}
+
+.show-menu {
+  .overlay {
+    display: block;
+    @include breakpoint($tablet-breakpoint) {
+      display: none;
+    }
+  }
+  .menu {
+    display: block;
+    width: 50%;
+    @include breakpoint($tablet-breakpoint) {
+      width: 100%;
+    }
+  }
+  .header-bar {
+    .mobile-button {
+      position: fixed;
+      left: 50%;
+      span {
+        background: #fff;
+      }
+    }
+  }
+
 }

@@ -43,9 +43,12 @@
     "open": "0.0.5",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
+    "sass-breakpoints": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-babel": "^6.1.2"
+  }
 }

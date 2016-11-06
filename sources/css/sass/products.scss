@@ -3,13 +3,12 @@
   height:87px;
   @include sgs-change('gutter styles', 'fixed');
   @include breakpoint($tablet-breakpoint) {
-    height:75px;
+    height:73px;
   }
   ul {
     margin: 0 10px;
     li {
       @include grid-span(8, 1);
-      @include sgs-change('output', 'float');
 
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(2.4, 1);
@@ -22,7 +21,13 @@
       padding-top:10px;
       padding-bottom: 10px;
       position: relative;
+      margin-bottom: 6px;
       display: none;
+      cursor: pointer;
+      &:hover {
+        background: $active-color;
+        color: #fff;
+      }
       &.active {
         display: inline-block;
         background: $active-color;
@@ -83,6 +88,18 @@
           }
       }
     }
+    &.open {
+      overflow: hidden;
+      background: #eee;
+      z-index: 10;
+      position: relative;
+      li {
+        display: block;
+      }
+      @include breakpoint($tablet-breakpoint) {
+        background: transparent;
+      }
+    }
   }
 }
 
@@ -90,7 +107,6 @@
     .view-product {
       padding-bottom: 30px;
       @include sgs-change('gutter styles', 'split');
-      @include sgs-change('output', 'isolation');
       @include grid-span (8, 1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(12, 1);

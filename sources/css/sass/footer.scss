@@ -1,0 +1,36 @@
+.footer {
+  background: #1e1e1e;
+  height:75px;
+  .links-group{
+    padding: 17px 0;
+    @include grid-span(2,1);
+    a{
+      display: inline-block;
+      border: 2px solid #30302f;
+      height:38px;
+      width: 38px;
+      background:url(../img/contact-links.png), #1e1e1e;
+      background-repeat: no-repeat;
+      margin-right:15px;
+      &.vk {
+        background-position: 0% 50%;
+      }
+      &.fb {
+        background-position: 100% 50%;
+      }
+      &:hover {
+        border-color: #fff;
+      }
+    }
+  }
+
+  .footer-logo {
+    padding: 10px 0;
+    text-align: right;
+    @include grid-span(3, 6);
+    @include sgs-change('output', 'isolation');
+
+
+  }
+
+}

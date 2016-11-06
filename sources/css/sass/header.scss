@@ -19,6 +19,7 @@
     }
   }
   .for-btn {
+    padding: 7px 0;
     @include grid-span(2, 5);
     @include breakpoint($tablet-breakpoint) {
       @include grid-span(2, 4);
@@ -42,11 +43,16 @@
       @include breakpoint($tablet-breakpoint) {
         margin: 8% 0;
       }
+      &:hover {
+        color: #000;
+        border-color: #000;
+      }
     }
   }
   .mobile-button {
+    z-index:101;
     @include grid-span(1, 1);
-    padding:15px 0;
+    padding:22px 0;
     span {
       width:50px;
       height:4px;
@@ -60,13 +66,15 @@
 }
 
 .menu {
-  display: none;
   background: #272727;
   position: fixed;
+  padding: 30px;
   left: 0;
   top: 0;
   height: 100%;
-  width:50%;
+  width:0%;
+  display: none;
+  z-index: 100;
   ul.navbar {
     margin-left: 10px;
     li {
@@ -83,10 +91,12 @@
     }
   }
   @include breakpoint($tablet-breakpoint) {
-    display: block;
+    width: 100%;
     position: relative;
     height: 48px;
     width: 100%;
+    display: block;
+    padding: 0;
     ul.navbar {
       margin-left: 10px;
       li {

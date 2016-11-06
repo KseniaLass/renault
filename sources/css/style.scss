@@ -1,8 +1,8 @@
 @import 'sass/mixins';
 @import 'sass/reset';
 
-@import '../../bower_components/breakpoint-sass/stylesheets/_breakpoint.scss';
-@import '../../bower_components/singularity/stylesheets/_singularitygs.scss';
+@import '../../app/bower_components/breakpoint-sass/stylesheets/_breakpoint.scss';
+@import '../../app/bower_components/singularity/stylesheets/_singularitygs.scss';
 
 
 body {
@@ -34,3 +34,4 @@ body {
 @import 'sass/header';
 @import 'sass/products';
 @import 'sass/article';
+@import 'sass/footer';
