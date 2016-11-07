@@ -24,6 +24,9 @@
         &:nth-child(3) {
           width: 50%;
         }
+        img {
+          width: 100%;
+        }
         strong {
           font-size: 29px;
           color: rgb(95, 40, 179);
@@ -170,7 +173,7 @@
       padding-right: 35%;
       background: url(../img/art-2.png), #f8f8f8;
       background-repeat: no-repeat;
-      background-position: 135% 100%;
+      background-position: 200px 100%;
 
       min-height:300px;
       
@@ -182,7 +185,6 @@
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(6,11);
         padding-right: 20%;
-        background-position: 200px 100%;
         min-height:356px;
       }
       .label {
