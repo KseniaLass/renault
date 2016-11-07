@@ -29,8 +29,5 @@
     text-align: right;
     @include grid-span(3, 6);
     @include sgs-change('output', 'isolation');
-
-
   }
-
 }

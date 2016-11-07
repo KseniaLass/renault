@@ -3,8 +3,6 @@
   .article-content {
     border-top: 2px solid rgba(0,0,0,.1);
     padding: 50px 0 0;
-    //display: inline-block;
-    //width: 100%;
     .scheme {
       text-align: center;
       margin-bottom: 20px;
@@ -14,13 +12,18 @@
       }
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(10,1);
-        text-align: left;
       }
       .for-img {
         display: inline-block;
         vertical-align: middle;
         margin:0 1%;
         text-align: center;
+        &:nth-child(1) {
+          width: 35%;
+        }
+        &:nth-child(3) {
+          width: 50%;
+        }
         strong {
           font-size: 29px;
           color: rgb(95, 40, 179);
@@ -29,9 +32,16 @@
             font-size: 25px;
           }
         }
+        @include breakpoint($tablet-breakpoint) {
+          &:nth-child(1),
+          &:nth-child(3) {
+            width: auto;
+          }
+        }
         @include breakpoint($desktop-breakpoint) {
           margin: 0 2%;
         }
+
       }
     }
     .art {
@@ -43,6 +53,10 @@
       -webkit-border-radius:5px;
       -moz-border-radius:5px;
       border-radius:5px;
+      @include breakpoint($desktop-breakpoint) {
+        min-height:356px;
+        margin-top: 30px;
+      }
       .label {
         position: absolute;
         top: 20px;
@@ -60,15 +74,29 @@
         width: 100%;
         margin-bottom: 15px;
         margin-top: 30px;
+        @include breakpoint($tablet-breakpoint) {
+          font-size: 23px;
+        }
+        @include breakpoint($desktop-breakpoint) {
+          font-size: 21px;
+        }
       }
       span {
         font-size: 24px;
         color: rgb(123, 123, 123);
+        @include breakpoint($tablet-breakpoint) {
+          font-size: 16px;
+        }
+        @include breakpoint($desktop-breakpoint) {
+          font-size: 14px;
+        }
       }
       .for-img {
         text-align: center;
       }
     }
+
+
 
     .important {
       @include grid-span(8, 1);
@@ -78,15 +106,23 @@
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(6, 11);
       }
+      border: none;
+      background: transparent;
       .label {
         background: #aaa5d4;
       }
       strong {
         margin-top: 10px;
         text-transform: uppercase;
+        @include breakpoint($tablet-breakpoint) {
+          font-size: 30px;
+        }
       }
       span {
         color: rgb(26, 23, 24);
+        @include breakpoint($desktop-breakpoint) {
+          font-size: 23px;
+        }
       }
     }
 
@@ -95,12 +131,38 @@
       @include grid-span(8,1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(5,1);
+        min-height:356px;
       }
       @include breakpoint($desktop-breakpoint) {
-        @include grid-span(16,1);
+        @include grid-span(4,1);
+        clear: left;
       }
       strong {
         margin-top: 10px;
+      }
+    }
+
+    .sterelize-full {
+      @include grid-span(8,1);
+      @include breakpoint($tablet-breakpoint) {
+        @include grid-span(7,6);
+      }
+      @include breakpoint($desktop-breakpoint) {
+        @include grid-span(6,5);
+        //clear: left;
+      }
+      .for-img {
+        @include grid-span(2,7);
+        @include breakpoint($desktop-breakpoint) {
+          @include grid-span(6,11)
+        }
+      }
+      .for-text {
+        @include grid-span(6,1);
+        margin-left: 0;
+        @include breakpoint($desktop-breakpoint) {
+          @include grid-span(10,1);
+        }
       }
     }
 
@@ -118,27 +180,15 @@
         background-position: 100% 100%;
       }
       @include breakpoint($desktop-breakpoint) {
-        @include grid-span(16,1);
+        @include grid-span(6,11);
+        padding-right: 20%;
+        background-position: 200px 100%;
+        min-height:356px;
       }
       .label {
         background: #cd9135;
       }
     }
-    .sterelize-full {
-      @include grid-span(8,1);
-      @include breakpoint($tablet-breakpoint) {
-        @include grid-span(7,6);
-      }
-      @include breakpoint($desktop-breakpoint) {
-        @include grid-span(16,1);
-      }
-      .for-img {
-        @include grid-span(2,7);
-      }
-      .for-text {
-        @include grid-span(6,1);
-        margin-left: 0;
-      }
-    }
+
   }
 }

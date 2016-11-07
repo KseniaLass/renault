@@ -7,6 +7,8 @@
   }
   ul {
     margin: 0 10px;
+    height:87px;
+    overflow: hidden;
     li {
       @include grid-span(8, 1);
 
@@ -15,6 +17,7 @@
       }
       @include breakpoint($desktop-breakpoint) {
         @include grid-span(3.2, 1);
+        height: 73px;
       }
       text-align: center;
       color: $text-color;
@@ -22,7 +25,6 @@
       padding-bottom: 10px;
       position: relative;
       margin-bottom: 6px;
-      display: none;
       cursor: pointer;
       &:hover {
         background: $active-color;
@@ -90,12 +92,10 @@
     }
     &.open {
       overflow: hidden;
+      height:100%;
       background: #eee;
       z-index: 10;
       position: relative;
-      li {
-        display: block;
-      }
       @include breakpoint($tablet-breakpoint) {
         background: transparent;
       }
@@ -104,93 +104,99 @@
 }
 
 .products {
-    .view-product {
-      padding-bottom: 30px;
-      @include sgs-change('gutter styles', 'split');
-      @include grid-span (8, 1);
-      @include breakpoint($tablet-breakpoint) {
-        @include grid-span(12, 1);
+  .tabs-content {
+    .tab {
+      display: none;
+      &.active {
+        display: block;
       }
-      @include breakpoint($desktop-breakpoint) {
-        @include grid-span(8, 1);
-      }
-      h4 {
-        font-size: 30px;
-        color: $text-color;
-        font-weight:bold;
-        text-transform: uppercase;
-        padding: 35px 0;
+      .view-product {
+        padding-bottom: 30px;
+        @include sgs-change('gutter styles', 'split');
+        @include grid-span (8, 1);
+        @include breakpoint($tablet-breakpoint) {
+          @include grid-span(12, 1);
+        }
         @include breakpoint($desktop-breakpoint) {
-          font-size: 25px;
-          min-height:140px;
+          @include grid-span(8, 1);
         }
-      }
-      .for-img {
-        text-align: center;
-        @include breakpoint($desktop-breakpoint) {
-          text-align: left;
-        }
-        img {
-          width:50%;
-          max-width:277px;
-        }
-      }
-    }
-
-  .about-product {
-    margin-top: 35px;
-    padding-bottom: 30px;
-    @include grid-span(8,1);
-    @include breakpoint($tablet-breakpoint) {
-      @include grid-span(12, 1);
-    }
-    @include breakpoint($desktop-breakpoint) {
-      @include grid-span(8, 9);
-    }
-    p {
-      font-size: 24px;
-      margin-bottom: 15px;
-      @include breakpoint($tablet-breakpoint) {
-        font-size: 20px;
-      }
-      @include breakpoint($desktop-breakpoint) {
-        font-size: 16px;
-        min-height:60px;
-      }
-    }
-    .advans {
-      margin-top: 35px;
-      .advan {
-        position: relative;
-        margin-bottom: 20px;
-        .for-img {
-          position: absolute;
-          top: 50%;
-          margin-top: -34px;
-        }
-        .for-text {
-          border: 2px solid #eae7f5;
-          border-radius: 9px;
-          background: #eae7f5;
-          padding: 20px 40px;
-          -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          box-sizing: border-box;
-          margin-left: 50px;
-          strong, span {
-            font-size: 18px;
-            display: inline-block;
-            width:100%;
-            @include breakpoint($tablet-breakpoint) {
-              font-size: 16px;
-            }
-            @include breakpoint($desktop-breakpoint) {
-              font-size: 14px;
-            }
+        h4 {
+          font-size: 30px;
+          color: $text-color;
+          font-weight:bold;
+          text-transform: uppercase;
+          padding: 35px 0;
+          @include breakpoint($desktop-breakpoint) {
+            font-size: 25px;
+            min-height:140px;
           }
+        }
+        .for-img {
+          text-align: center;
 
-          strong {
-            margin-bottom: 5px;
+          img {
+            width:50%;
+            max-width:277px;
+          }
+        }
+      }
+
+      .about-product {
+        margin-top: 35px;
+        padding-bottom: 30px;
+        @include grid-span(8,1);
+        @include breakpoint($tablet-breakpoint) {
+          @include grid-span(12, 1);
+        }
+        @include breakpoint($desktop-breakpoint) {
+          @include grid-span(8, 9);
+        }
+        p {
+          font-size: 24px;
+          margin-bottom: 15px;
+          @include breakpoint($tablet-breakpoint) {
+            font-size: 20px;
+          }
+          @include breakpoint($desktop-breakpoint) {
+            font-size: 16px;
+            min-height:60px;
+          }
+        }
+        .advans {
+          margin-top: 35px;
+          .advan {
+            position: relative;
+            margin-bottom: 20px;
+            .for-img {
+              position: absolute;
+              top: 50%;
+              margin-top: -34px;
+            }
+            .for-text {
+              border: 2px solid #eae7f5;
+              border-radius: 9px;
+              background: #eae7f5;
+              padding: 20px 40px;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              margin-left: 50px;
+              strong, span {
+                font-size: 18px;
+                display: inline-block;
+                width:100%;
+                @include breakpoint($tablet-breakpoint) {
+                  font-size: 16px;
+                }
+                @include breakpoint($desktop-breakpoint) {
+                  font-size: 14px;
+                }
+              }
+
+              strong {
+                margin-bottom: 5px;
+              }
+            }
           }
         }
       }

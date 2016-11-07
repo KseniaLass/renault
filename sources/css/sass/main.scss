@@ -100,8 +100,20 @@ a {
     .mobile-button {
       position: fixed;
       left: 50%;
+      margin-left: 30px;
+      top: 35px;
       span {
         background: #fff;
+        position: absolute;
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
       }
     }
   }
