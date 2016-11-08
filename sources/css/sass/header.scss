@@ -92,6 +92,7 @@
     width: 100%;
     display: block;
     padding: 0;
+    z-index: 98;
   }
   ul.navbar {
     padding: 30px;
@@ -224,7 +225,7 @@
     @include breakpoint($desktop-breakpoint) {
       top: 114px;
       padding: 13px 20px;
-      width: 172px;
+      width: 175px;
     }
     span {
       font-size: 15px;
