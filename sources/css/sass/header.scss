@@ -19,9 +19,6 @@
       max-width:248px;
       width: 100%;
     }
-    @include breakpoint($desktop-breakpoint) {
-      //padding-left: 27px;
-    }
   }
   .for-btn {
     padding: 9px 0;
@@ -65,6 +62,10 @@
       background: #272727;
       margin-bottom: 8px;
       border-radius: 6px;
+      -webkit-transition: transform .5s linear;
+      -moz-transition: transform .5s linear;
+      -ms-transition: transform .5s linear;
+      -o-transition: transform .5s linear;
       transition: transform .5s linear;
     }
   }
@@ -79,16 +80,35 @@
   width:0%;
   overflow: hidden;
   z-index: 100;
+  -webkit-transition: width .2s linear;
+  -moz-transition: width .2s linear;
+  -ms-transition: width .2s linear;
+  -o-transition: width .2s linear;
   transition: width .2s linear;
+  @include breakpoint($tablet-breakpoint) {
+    width: 100%;
+    position: relative;
+    height: 48px;
+    width: 100%;
+    display: block;
+    padding: 0;
+  }
   ul.navbar {
-    @include grid-span(8,1);
     padding: 30px;
+    @include grid-span(8,1);
     @include breakpoint($tablet-breakpoint) {
+      @include grid-span(12,1);
       padding: 0;
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(16,1);
     }
     li {
       display: block;
       line-height: 48px;
+      @include breakpoint($tablet-breakpoint) {
+        display: inline-block;
+      }
       a {
         text-transform: uppercase;
         font-size: 15px;
@@ -99,18 +119,6 @@
         &:hover {
           color: $active-color;
         }
-      }
-    }
-  }
-  @include breakpoint($tablet-breakpoint) {
-    width: 100%;
-    position: relative;
-    height: 45px;
-    display: block;
-    padding: 0;
-    ul.navbar {
-      li {
-        display: inline-block;
       }
     }
   }

@@ -33,8 +33,8 @@
   .footer-logo {
     padding: 10px 13px 8px;
     text-align: right;
-    @include grid-span(3, 6, $output-style: 'isolation');
     background: #1e1e1e;
+    @include grid-span(3, 6, $output-style: 'isolation');
     @include breakpoint($tablet-breakpoint) {
       margin-right: 0px;
     }

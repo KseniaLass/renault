@@ -124,7 +124,7 @@
           font-size: 14px;
         }
         @include breakpoint($desktop-breakpoint) {
-          font-size: 12px;
+          font-size: 13px;
         }
       }
       .for-img {
@@ -133,6 +133,10 @@
     }
 
     .important {
+      border: none;
+      background: transparent;
+      padding: 40px 0;
+      margin-bottom: 0;
       @include grid-span(8, 1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(12, 1);
@@ -143,10 +147,6 @@
         margin-top: 0;
         padding: 24px 0;
       }
-      border: none;
-      background: transparent;
-      padding: 40px 0;
-      margin-bottom: 0;
       .label {
         background: #aaa5d4;
         left: 0;
@@ -203,7 +203,7 @@
       @include grid-span(8,1);
       @include breakpoint($tablet-breakpoint) {
         @include grid-span(7,6);
-        padding: 33px 35px 15px 35px;
+        padding: 33px 35px 15px 12px;
         min-height:347px;
         strong {
           font-size: 21px;
@@ -211,23 +211,23 @@
         }
       }
       @include breakpoint($desktop-breakpoint) {
+        padding: 46px 4px 5px 20px;
         @include grid-span(6,5);
-        padding: 46px 4px 5px 11px;
         strong {
           font-size: 18px;
           margin-bottom: 30px;
         }
       }
       .for-img {
-        @include grid-span(1.7,6);
         margin-left: 0;
+        @include grid-span(2.5,6);
         @include breakpoint($desktop-breakpoint) {
           @include grid-span(6,11)
         }
       }
       .for-text {
-        @include grid-span(6.3,1);
         margin-left: 0;
+        @include grid-span(5.5,1);
         @include breakpoint($desktop-breakpoint) {
           @include grid-span(10,1);
         }
@@ -240,25 +240,23 @@
       background: url(../img/art-2.png), #f8f8f8;
       background-repeat: no-repeat;
       background-position: 250px 100%;
-
       min-height:300px;
-      
       @include grid-span(8,1);
       @include breakpoint($tablet-breakpoint) {
-        @include grid-span(12,1);
         background-position: 100% 100%;
         min-height:356px;
         padding-top: 39px;
         padding-right: 50%;
+        @include grid-span(12,1);
         strong {
           margin-bottom: 28px;
         }
       }
       @include breakpoint($desktop-breakpoint) {
-        @include grid-span(6,11);
         background-position: -250% 100%;
         padding-right: 17%;
         min-height:347px;
+        @include grid-span(6,11);
         strong {
           margin-top: 22px;
         }
@@ -266,8 +264,6 @@
       .label {
         background: #cd9135;
       }
-
     }
-
   }
 }
