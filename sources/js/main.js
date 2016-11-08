@@ -7,7 +7,7 @@ $(function() {
     });
 });
 
-// Show mobile list on collection
+// Show mobile list on tabs
 $(function() {
     $('.tabs ul li').on('click', (e) => {
         let li = $(e.target).closest('li'),

@@ -4,12 +4,18 @@
   .links-group{
     padding: 17px 0;
     @include grid-span(2,1);
+    @include breakpoint($tablet-breakpoint) {
+      @include grid-span(2,1);
+    }
+    @include breakpoint($desktop-breakpoint) {
+      @include grid-span(2,1);
+    }
     a{
       display: inline-block;
       border: 2px solid #30302f;
-      height:38px;
-      width: 38px;
-      background:url(../img/contact-links.png), #1e1e1e;
+      height:35px;
+      width: 35px;
+      background: url('../img/contact-links.png'), #1e1e1e;
       background-repeat: no-repeat;
       margin-right:15px;
       &.vk {
@@ -25,10 +31,12 @@
   }
 
   .footer-logo {
-    padding: 10px 0;
+    padding: 10px 13px 8px;
     text-align: right;
-    @include grid-span(3, 6);
-    @include sgs-change('output', 'isolation');
+    @include grid-span(3, 6, $output-style: 'isolation');
     background: #1e1e1e;
+    @include breakpoint($tablet-breakpoint) {
+      margin-right: 0px;
+    }
   }
 }
