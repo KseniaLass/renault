@@ -27,21 +27,37 @@ $active-color: #ed1d25;
 }
 
 .wrapper {
+  min-width: 100%;
 
+  @media #{$mobile} {
+    min-width: 640px
+  }
+
+
+  @media #{$tablet} {
+    min-width: 1024px
+  }
+
+
+  @media #{$desktop} {
+    min-width: 1360px
+  }
+
+  //overflow-x: hidden
 }
 
 .container {
     margin: 0 auto;
     @media #{$mobile} {
-      width: 640px;
+      min-width: 640px;
     }
     @media #{$tablet} {
       width: 950px;
     }
     @media #{$desktop} {
-      width: 1267px;
+      width: 1324px;
     }
-    //@include background-grid($color: green);
+    //@include background-grid($color: rgba(green, 0.5));
     overflow: hidden;
 }
 
