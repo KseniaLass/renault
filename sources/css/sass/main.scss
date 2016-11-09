@@ -28,28 +28,21 @@ $active-color: #ed1d25;
 
 .wrapper {
   min-width: 100%;
-
   @media #{$mobile} {
     min-width: 640px
   }
-
-
   @media #{$tablet} {
     min-width: 1024px
   }
-
-
   @media #{$desktop} {
     min-width: 1360px
   }
-
-  //overflow-x: hidden
 }
 
 .container {
     margin: 0 auto;
     @media #{$mobile} {
-      min-width: 640px;
+      width: 640px;
     }
     @media #{$tablet} {
       width: 950px;
