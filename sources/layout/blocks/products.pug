@@ -23,37 +23,38 @@ block vars
     .container
         .products__tabs-content.js-tabs-content
             - for (var x=0; x < products.length; x++)
-            div(class= "" + x == 0 ? 'products__tab js-tab is-active' : 'products__tab js-tab' + "" data-link="" + products[x] + "")
-                .products__view-product
-                    h4 PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] — это полнорационный влажный корм для котят
-                    .products__for-img
-                        img(src='../img/product2.png')
-                        img(src='../img/product1.png')
-                .products__about-product
-                    p Вкусные кусочки курицы в желе и кусочки гриль  в соусе разработаны специально для растущего организма котят и рекомендованы для беременных  и кормящих кошек.
-                    p PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] обеспечивает все потребности организма котенка и является надежной основой для здорового старта.
-                    .products__advans
-                        .products__advan
-                            .products__for-img
-                                img(src='img/advan1.png')
-                            .products__for-text
-                                strong Способствует развитию жизненно важных функций
-                                span Наличие всех необходимых питательных веществ обеспечивает сбалансированное питание
-                        .products__advan
-                            .products__for-img
-                                img(src='img/advan2.png')
-                            .products__for-text
-                                strong Влияет на развитие мозга
-                                span Полиненасыщенные кислоты поддерживают здоровое развитие мозга и зрения
-                        .products__advan
-                            .products__for-img
-                                img(src='img/advan3.png')
-                            .products__for-text
-                                strong Формирует костную и мышечную массу
-                                span Высококачественный белок обеспечивает здоровое развитие костей и мышц
-                        .products__advan
-                            .products__for-img
-                                img(src='img/advan4.png')
-                            .products__for-text
-                                strong Обладает прекрасной формой и вкусом
-                                span Специально разработанные для котят нежные кусочки, которые легко жевать
+                div(class=""+ x==0 ? 'products__tab js-tab is-active' :'products__tab js-tab'+"" data-link=""+products[x]+"")
+                    .products__view-product
+                        h4 PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] — это полнорационный влажный корм для котят
+                        .products__for-img
+                            img(src='../img/product2.png')
+                            img(src='../img/product1.png')
+                    .products__about-product
+                        p Вкусные кусочки курицы в желе и кусочки гриль  в соусе разработаны специально для растущего организма котят и рекомендованы для беременных  и кормящих кошек.
+                        p PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] обеспечивает все потребности организма котенка и является надежной основой для здорового старта.
+                        .products__advans
+                            .products__advan
+                                .products__for-img
+                                    img(src='img/advan1.png')
+                                .products__for-text
+                                    strong Способствует развитию жизненно важных функций
+                                    span Наличие всех необходимых питательных веществ обеспечивает сбалансированное питание
+                            .products__advan
+                                .products__for-img
+                                    img(src='img/advan2.png')
+                                .products__for-text
+                                    strong Влияет на развитие мозга
+                                    span Полиненасыщенные кислоты поддерживают здоровое развитие мозга и зрения
+                            .products__advan
+                                .products__for-img
+                                    img(src='img/advan3.png')
+                                .products__for-text
+                                    strong Формирует костную и мышечную массу
+                                    span Высококачественный белок обеспечивает здоровое развитие костей и мышц
+                            .products__advan
+                                .products__for-img
+                                    img(src='img/advan4.png')
+                                .products__for-text
+                                    strong Обладает прекрасной формой и вкусом
+                                    span Специально разработанные для котят нежные кусочки, которые легко жевать
+
