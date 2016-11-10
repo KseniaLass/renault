@@ -26,12 +26,14 @@ $(function() {
         // Open/close modal
         .on('click', '.js-popup-link', function () {
             let $modal = $('.js-modal');
+
             $modal.addClass('animation-showModal is-on');
             $('.wrapper').addClass('is-show-modal');
             setTimeout(() => $modal.removeClass('animation-showModal'), 500);
         })
         .on('click', '.overlay', function () {
             let $modal = $('.js-modal');
+
             $modal.addClass('animation-hideModal');
             $('.wrapper').removeClass('is-show-modal');
             setTimeout(() => $modal.removeClass('animation-hideModal is-on'), 500);
@@ -41,12 +43,14 @@ $(function() {
         .on('focus', '.js-form-input', function () {
             let $input = $(this),
                 $parent = $input.closest('.modal__for-row');
+
             $parent.addClass('is-active');
         })
         .on('blur', '.js-form-input', function () {
             let $input = $(this),
                 $parent = $input.closest('.modal__for-row'),
                 val = $input.val();
+
         if(val.length == 0) {
             $parent.removeClass('is-active');
         }
