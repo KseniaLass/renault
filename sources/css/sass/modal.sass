@@ -13,24 +13,39 @@
   overflow: hidden
   display: none
 
-  &.on 
+  &.form-active
+    .modal__form-container
+      display: block
+    .modal__resault-container
+      display: none
+
+  &.resault-active
+    height: auto
+    .modal__form-container
+      display: none
+    .modal__resault-container
+      display: block
+
+  &.is-on
     display: block
-  
-  h4.title 
+
+  &__title
     color: $active-color
     text-transform: uppercase
     text-align: center
     font-weight: bold
     font-size: 24px
-  
-  form.reg-form 
-    margin-top: 30px
 
-    .for-input 
+  &__form-container
+
+    .modal__reg-form
+      margin-top: 30px
+
+    .modal__for-row
       position: relative
       margin-bottom: 10px
 
-      input 
+      &-input
         display: block
         background: transparent
         width: 100%
@@ -40,33 +55,32 @@
         padding: 0 15px
         font-weight: bold
 
-        &:focus, &.error 
-          box-shadow: 0px 0px 10px 0px rgba(80, 186, 56, 0.75) !important
-        
-        &.error 
-          box-shadow: 0px 0px 10px 0px rgba(237, 29, 37, 0.75) !important
+        &:focus, &.is-error
+          box-shadow: 0 0 10px 0 rgba(80, 186, 56, 0.75) !important
+
+        &.is-error
+          box-shadow: 0 0 10px 0 rgba(237, 29, 37, 0.75) !important
           border: 1px solid rgb(237, 29, 37)
-      
-      label 
+
+      &-label
         position: absolute
         left: 15px
         top: 15px
         -webkit-transition: all .2s linear
         -moz-transition: all .2s linear
-        -ms-transition: all .2s linear
         -o-transition: all .2s linear
         transition: all .2s linear
-      
-      &.active 
-        label 
+
+      &.is-active
+        label
           font-size: 10px
           top: 3px
-    
-    .for-btn 
+
+    .modal__for-btn
       margin-top: 30px
       text-align: center
 
-      .sub-btn 
+      .modal__submit-btn
         height: 45px
         background: rgb(237, 29, 37)
         border: 2px solid rgb(237, 29, 37)
@@ -78,10 +92,10 @@
         cursor: pointer
         -webkit-appearance: none
 
-        &:hover 
+        &:hover
           background: #f75258
           border: 2px solid #f75258
 
-        &:active 
+        &:active
           background: #b1161c
           border: 2px solid #b1161c

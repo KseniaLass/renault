@@ -2,7 +2,7 @@
   background: #1e1e1e
   height: 75px
 
-  .links-group
+  &__links-group
     padding: 17px 0
     @include grid-span(2,1)
 
@@ -20,20 +20,20 @@
       background: url('../img/contact-links.png'), #1e1e1e
       background-repeat: no-repeat
       margin-right: 15px
-      &.vk 
-        background-position: 0% 50%
-      
-      &.fb 
+      &.footer__link-vk
+        background-position: 0 50%
+
+      &.footer__link-fb
         background-position: 100% 50%
       
       &:hover 
         border-color: #fff
 
-  .footer-logo 
+  &__logo
     padding: 10px 13px 8px
     text-align: right
     background: #1e1e1e
 
     @include grid-span(3, 6, $output-style: 'isolation')
-    @include breakpoint($tablet-breakpoint) 
-      margin-right: 0px
+    @include breakpoint($tablet-breakpoint)
+      margin-right: 0

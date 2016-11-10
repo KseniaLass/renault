@@ -11,6 +11,5 @@
     "singularity": "^1.7.0"
   },
   "devDependencies": {
-    "breakpoint": "~4.6.4"
   }
 }

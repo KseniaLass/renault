@@ -1,133 +1,132 @@
-.header-bar 
-  padding: 13px 0
-  display: inline-block
-  width: 100%
-  height: 95px
-
-  @include grid-span(8, 1)
-
-  @include breakpoint($tablet-breakpoint) 
-    height: 88px
-    @include grid-span(12, 1)
-  
-  @include breakpoint($desktop-breakpoint) 
-    @include grid-span(16,1)
-  
-  .logo-link 
-    float: left
-    margin-right: 37px
-    img 
-      height: 100%
-      max-width: 248px
-      width: 100%
-  
-  .for-btn 
-    padding: 9px 0
-    width: 120px
+.header
+  &__bar
+    padding: 13px 0
     display: inline-block
-    float: left
-    margin-right: 30px
-    a 
-      display: inline-block
-      color: rgba(0, 0, 0, 0.6)
-      font-weight: 600
-      height: 36px
-      width: 100%
-      line-height: 32px
-      text-align: center
-      border: 1px solid rgba(39,39,39, .5)
-      border-radius: 6px
-      text-decoration: none
-      margin: 5% 0
-      &:hover 
-        color: #000
-        border-color: #000
-  
-  .mobile-button 
-    z-index: 101
-    float: left
-    margin-right: 30px
-    padding: 20px 0
-    cursor: pointer
-    &:hover 
-      span 
-        background: $active-color
-    span 
-      width: 47px
-      height: 4px
-      display: block
-      background: #272727
-      margin-bottom: 8px
-      border-radius: 6px
-      -webkit-transition: transform .5s linear
-      -moz-transition: transform .5s linear
-      -ms-transition: transform .5s linear
-      -o-transition: transform .5s linear
-      transition: transform .5s linear
+    width: 100%
+    height: 95px
 
-.menu 
+    @include grid-span(8, 1)
+
+    @include breakpoint($tablet-breakpoint)
+      height: 88px
+      @include grid-span(12, 1)
+
+    @include breakpoint($desktop-breakpoint)
+      @include grid-span(16, 1)
+
+    .header__logo-link
+      float: left
+      margin-right: 37px
+      img
+        height: 100%
+        max-width: 248px
+        width: 100%
+
+    .header__for-btn
+      padding: 9px 0
+      width: 120px
+      display: inline-block
+      float: left
+      margin-right: 30px
+      a
+        display: inline-block
+        color: rgba(0, 0, 0, 0.6)
+        font-weight: 600
+        height: 36px
+        width: 100%
+        line-height: 32px
+        text-align: center
+        border: 1px solid rgba(39, 39, 39, .5)
+        border-radius: 6px
+        text-decoration: none
+        margin: 5% 0
+        &:hover
+          color: #000
+          border-color: #000
+
+    .header__mobile-button
+      z-index: 101
+      float: left
+      margin-right: 30px
+      padding: 20px 0
+      cursor: pointer
+      &:hover
+        span
+          background: $active-color
+      span
+        width: 47px
+        height: 4px
+        display: block
+        background: #272727
+        margin-bottom: 8px
+        border-radius: 6px
+        -webkit-transition: transform .5s linear
+        -moz-transition: transform .5s linear
+        -o-transition: transform .5s linear
+        transition: transform .5s linear
+
+.menu
   background: #272727
   position: fixed
   left: 0
   top: 0
   height: 100%
-  width: 0%
+  width: 0
   overflow: hidden
   z-index: 100
   -webkit-transition: width .2s linear
   -moz-transition: width .2s linear
-  -ms-transition: width .2s linear
   -o-transition: width .2s linear
   transition: width .2s linear
 
-  @include breakpoint($tablet-breakpoint) 
+  @include breakpoint($tablet-breakpoint)
     width: 100%
     position: relative
     height: 48px
-    width: 100%
     display: block
     padding: 0
     z-index: 98
-  
-  ul.navbar 
+
+  &__navbar
     padding: 30px
     @include grid-span(8,1)
 
-    @include breakpoint($tablet-breakpoint) 
+    @include breakpoint($tablet-breakpoint)
       @include grid-span(12,1)
       padding: 0
-    
-    @include breakpoint($desktop-breakpoint) 
+
+    @include breakpoint($desktop-breakpoint)
       @include grid-span(16,1)
-    
-    li 
+
+    li
       display: block
       line-height: 48px
 
-      @include breakpoint($tablet-breakpoint) 
+      @include breakpoint($tablet-breakpoint)
         display: inline-block
-      
-      a 
+
+      a
         text-transform: uppercase
         font-size: 15px
         color: rgb(255, 255, 255)
         font-weight: bold
         display: inline-block
         margin-right: 20px
-        &:hover 
+        &:hover
           color: $active-color
+
 
 .main-banner 
   position: relative
-  background: url(../img/bg.jpg) no-repeat
-  background-position: 50% 0%
+  background: url('../img/bg.jpg') no-repeat
+  background-position: 50% 0
 
-  @include breakpoint($desktop-breakpoint) 
-    background: url(../img/bg.png) no-repeat
-    background-position: 0% 41%
+  @include breakpoint($desktop-breakpoint)
+    background: url('../img/bg.png') no-repeat
+    background-position: 0 41%
     height: 727px
-  
-  .banner-content 
+
+  &__content
     display: inline-block
     width: 100%
     margin-top: 512px
@@ -137,8 +136,8 @@
     
     @include breakpoint($desktop-breakpoint) 
       margin-top: 0
-    
-    .text-cont 
+
+    .main-banner__text-cont
       @include grid-span (8, 1)
 
       @include breakpoint($tablet-breakpoint) 
@@ -200,11 +199,11 @@
         sup 
           font-size: 12px
 
-  .sticker 
+  &__sticker
     width: 161px
-    border-radius: 0px 5px 5px 0px
+    border-radius: 0 5px 5px 0
     top: 68px
-    left: 0px
+    left: 0
     padding: 13px 11px
     position: absolute
     background-image: -moz-linear-gradient( 0deg, rgb(237,28,36) 0%, rgb(246,77,83) 37%, rgb(254,125,129) 58%, rgb(227,80,82) 81%, rgb(199,34,34) 100%)
@@ -225,6 +224,7 @@
       text-transform: uppercase
       line-height: 1.4
 
+
 .collection 
   position: relative
   height: 342px
@@ -237,8 +237,8 @@
     margin-top: -240px
     padding: 0
     height: 504px
-  
-  .middle-line 
+
+  &__middle-line
     width: 100%
     height: 14px
     background: $active-color
@@ -252,10 +252,10 @@
     
     @include breakpoint($desktop-breakpoint) 
       margin-top: -14px
-  
-  .collection-pic 
+
+  &__pic
     height: 346px
-    background: url(../img/collection-pic.png) no-repeat
+    background: url('../img/collection-pic.png') no-repeat
     background-position: 50% 50%
     position: relative
     z-index: 2

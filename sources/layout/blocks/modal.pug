@@ -1,11 +1,14 @@
-.modal
-    h4.title Регистрация
-    form.reg-form
-        .for-input
-            label(for='login') Имя пользователя
-            input(type='text' id='login' name='login')
-        .for-input
-            label(for='pass') Пароль
-            input(type='password' id='pass' name='pass')
-        .for-btn
-            input(type='submit' class='sub-btn' value="Отправить" )
+.modal.js-modal.form-active
+	.modal__form-container
+		h4.modal__title Регистрация
+		form.modal__reg-form.js-form
+			.modal__for-row
+				label.modal__for-row-label.js-form-label(for='login') Имя пользователя
+				input.modal__for-row-input.js-form-input(type='text' id='login' name='login')
+			.modal__for-row
+				label.modal__for-row-label.js-form-label(for='pass') Пароль
+				input.modal__for-row-input.js-form-input(type='password' id='pass' name='pass')
+			.modal__for-btn
+				input.modal__submit-btn.js-modal-submit-btn(type='button' value="Отправить" )
+	.modal__resault-container
+		h4.modal__title Регистрация успешна.
