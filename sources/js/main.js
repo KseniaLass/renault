@@ -1,4 +1,5 @@
 // main bundle >> main.bundle.js
+import validForm from './modules/module.validForm';
 
 $(function() {
 
@@ -62,23 +63,9 @@ $(function() {
     })
 
     // Simple form validation
-    .on('click', '.js-modal-submit-btn', function () {
-        let $btn = $(this),
-            $modal = $btn.closest('.js-modal'),
-            $formContainer = $modal.find('.modal__form-container'),
-            $input = $formContainer.find('.js-form-input'),
-            error = false;
-
-        $input.each(function () {
-            let $curInput = $(this),
-                value = $curInput.val();
-            if (value.length < 3) {
-                $curInput.addClass('animation-shakeError is-error');
-                error = true;
-            }
+    .on('click', '.js-form-submit-btn', function () {
+        let valid = new validForm({
+            'valid': true
         });
-        if (!error) {
-            $modal.addClass('resault-active').removeClass('form-active')
-        }
     })
 });
