@@ -3,11 +3,11 @@
 		h4.modal__title Регистрация
 		form.form.form__modal.form__reg.js-form
 			.form__row
-				label.form__label.js-form-label(for='login') Имя пользователя
-				input.form__input.js-form-input(type='text' id='login' name='login')
+				label.form__label.js-form-label(for='login') Логин
+				input.form__input.js-form-input(type='text' id='login' name='login' data-validation="login")
 			.form__row
 				label.form__label.js-form-label(for='pass') Пароль
-				input.form__input.js-form-input(type='password' id='pass' name='pass')
+				input.form__input.js-form-input(type='password' id='pass' name='pass' data-validation="pass")
 			.form__btn
 				input.modal__submit-btn.js-form-submit-btn(type='button' value="Отправить" )
 	.modal__resault

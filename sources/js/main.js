@@ -43,13 +43,13 @@ $(function() {
     // Form input label
     .on('focus', '.js-form-input', function () {
         let $input = $(this),
-            $parent = $input.closest('.modal__for-row');
+            $parent = $input.closest('.form__row');
 
         $parent.addClass('is-active');
     })
     .on('blur', '.js-form-input', function () {
         let $input = $(this),
-            $parent = $input.closest('.modal__for-row'),
+            $parent = $input.closest('.form__row'),
             val = $input.val();
 
         if(val.length == 0) {
