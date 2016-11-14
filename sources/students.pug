@@ -2,17 +2,16 @@ extends layout/template
 
 block vars
 	- var pageTemplate = 'index'; // page-specific var
+	- var pageName = 'Студентам';
+	- var pageLink = 'students'
 
 block head
 	script(src="/js/main.bundle.js")
 
-
 block content
 	include layout/blocks/header
 	include layout/blocks/menu
-	include layout/blocks/banner
-	include layout/blocks/products
-	include layout/blocks/articles
+	include layout/blocks/title
 	include layout/blocks/footer
 	include layout/blocks/modal
 	.overlay.js-overlay

@@ -1,5 +1,4 @@
-block vars
-    - var products = ['Junior', 'Delicate', 'Sterelised', 'Adult', 'Housecat'];
+- var products = ['Junior', 'Delicate', 'Sterelised', 'Adult', 'Housecat'];
 .tabs
     .container
         ul.tabs__list.js-tabs-list
@@ -26,7 +25,7 @@ block vars
                 div(class=""+ x==0 ? 'products__tab js-tab is-active' :'products__tab js-tab'+"" data-link=""+products[x]+"")
                     .products__view-product
                         h4 PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] — это полнорационный влажный корм для котят
-                        .products__for-img
+                        .products__img
                             img(src='../img/product2.png')
                             img(src='../img/product1.png')
                     .products__about-product
@@ -34,27 +33,27 @@ block vars
                         p PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] обеспечивает все потребности организма котенка и является надежной основой для здорового старта.
                         .products__advans
                             .products__advan
-                                .products__for-img
+                                .products__img
                                     img(src='img/advan1.png')
-                                .products__for-text
+                                .products__text
                                     strong Способствует развитию жизненно важных функций
                                     span Наличие всех необходимых питательных веществ обеспечивает сбалансированное питание
                             .products__advan
-                                .products__for-img
+                                .products__img
                                     img(src='img/advan2.png')
-                                .products__for-text
+                                .products__text
                                     strong Влияет на развитие мозга
                                     span Полиненасыщенные кислоты поддерживают здоровое развитие мозга и зрения
                             .products__advan
-                                .products__for-img
+                                .products__img
                                     img(src='img/advan3.png')
-                                .products__for-text
+                                .products__text
                                     strong Формирует костную и мышечную массу
                                     span Высококачественный белок обеспечивает здоровое развитие костей и мышц
                             .products__advan
-                                .products__for-img
+                                .products__img
                                     img(src='img/advan4.png')
-                                .products__for-text
+                                .products__text
                                     strong Обладает прекрасной формой и вкусом
                                     span Специально разработанные для котят нежные кусочки, которые легко жевать
 

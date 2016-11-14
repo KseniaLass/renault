@@ -1,0 +1,29 @@
+-var pageLink
+.menu
+	.container
+		ul.menu__navbar
+			li.menu__navbar-item
+				if pageLink == 'articles'
+					a.is-active(href='/articles.html') Статьи
+				else
+					a(href='/articles.html') Статьи
+			li.menu__navbar-item
+				if pageLink == 'clinics'
+					a.is-active(href='/clinics.html') Наши клиники
+				else
+					a(href='/clinics.html') Наши клиники
+			li.menu__navbar-item
+				if pageLink == 'food'
+					a.is-active(href='/food.html') Корма
+				else
+					a(href='/food.html') Корма
+			li.menu__navbar-item
+				if pageLink == 'action'
+					a.is-active(href='/action.html') Акции
+				else
+					a(href='/action.html') Акции
+			li.menu__navbar-item
+				if pageLink == 'students'
+					a.is-active(href='/students.html') Студентам
+				else
+					a(href='/students.html') Студентам

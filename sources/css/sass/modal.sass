@@ -14,16 +14,16 @@
   display: none
 
   &.form-active
-    .modal__form-container
+    .modal__form
       display: block
-    .modal__resault-container
+    .modal__resault
       display: none
 
   &.resault-active
     height: auto
-    .modal__form-container
+    .modal__form
       display: none
-    .modal__resault-container
+    .modal__resault
       display: block
 
   &.is-on
@@ -36,66 +36,66 @@
     font-weight: bold
     font-size: 24px
 
-  &__form-container
+.form
 
-    .modal__reg-form
-      margin-top: 30px
+  &__reg
+    margin-top: 30px
 
-    .modal__for-row
-      position: relative
-      margin-bottom: 10px
+  &__row
+    position: relative
+    margin-bottom: 10px
 
-      &-input
-        display: block
-        background: transparent
-        width: 100%
-        height: 48px
-        border-radius: 3px
-        border: 1px solid #ccc
-        padding: 0 15px
-        font-weight: bold
+    .form__input
+      display: block
+      background: transparent
+      width: 100%
+      height: 48px
+      border-radius: 3px
+      border: 1px solid #ccc
+      padding: 0 15px
+      font-weight: bold
 
-        &:focus, &.is-error
-          box-shadow: 0 0 10px 0 rgba(80, 186, 56, 0.75) !important
+      &:focus, &.is-error
+        box-shadow: 0 0 10px 0 rgba(80, 186, 56, 0.75) !important
 
-        &.is-error
-          box-shadow: 0 0 10px 0 rgba(237, 29, 37, 0.75) !important
-          border: 1px solid rgb(237, 29, 37)
+      &.is-error
+        box-shadow: 0 0 10px 0 rgba(237, 29, 37, 0.75) !important
+        border: 1px solid rgb(237, 29, 37)
 
-      &-label
-        position: absolute
-        left: 15px
-        top: 15px
-        -webkit-transition: all .2s linear
-        -moz-transition: all .2s linear
-        -o-transition: all .2s linear
-        transition: all .2s linear
+    .form__label
+      position: absolute
+      left: 15px
+      top: 15px
+      -webkit-transition: all .2s linear
+      -moz-transition: all .2s linear
+      -o-transition: all .2s linear
+      transition: all .2s linear
 
-      &.is-active
-        label
-          font-size: 10px
-          top: 3px
+    &.is-active
+      label
+        font-size: 10px
+        top: 3px
 
-    .modal__for-btn
-      margin-top: 30px
-      text-align: center
+  &__btn
+    margin-top: 30px
+    text-align: center
 
-      .modal__submit-btn
-        height: 45px
-        background: rgb(237, 29, 37)
-        border: 2px solid rgb(237, 29, 37)
-        border-radius: 4px
-        color: #fff
-        text-transform: uppercase
-        font-weight: bold
-        padding: 0 20px
-        cursor: pointer
-        -webkit-appearance: none
+    .modal__submit-btn
+      height: 45px
+      background: rgb(237, 29, 37)
+      border: 2px solid rgb(237, 29, 37)
+      border-radius: 4px
+      color: #fff
+      text-transform: uppercase
+      font-weight: bold
+      padding: 0 20px
+      cursor: pointer
+      -webkit-appearance: none
 
-        &:hover
-          background: #f75258
-          border: 2px solid #f75258
+      &:hover
+        background: #f75258
+        border: 2px solid #f75258
 
-        &:active
-          background: #b1161c
-          border: 2px solid #b1161c
+      &:active
+        background: #b1161c
+        border: 2px solid #b1161c
