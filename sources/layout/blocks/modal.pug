@@ -5,9 +5,11 @@
 			.form__row
 				label.form__label.js-form-label(for='login') Логин
 				input.form__input.js-form-input(type='text' id='login' name='login' data-validation="login")
+				span.form__message.js-form-message Не менее 3х латинских символов
 			.form__row
 				label.form__label.js-form-label(for='pass') Пароль
 				input.form__input.js-form-input(type='password' id='pass' name='pass' data-validation="pass")
+				span.form__message.js-form-message Не менее 8 цифр и символов в разных регистрах
 			.form__btn
 				input.modal__submit-btn.js-form-submit-btn(type='button' value="Отправить" )
 	.modal__resault

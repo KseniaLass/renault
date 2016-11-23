@@ -1,5 +1,6 @@
 // main bundle >> main.bundle.js
-import validForm from './modules/module.validForm';
+import ValidForm from './modules/module.validForm';
+import autocomplete from './modules/module.autocomplete';
 
 $(function() {
 
@@ -10,7 +11,7 @@ $(function() {
         $('.wrapper').toggleClass('is-show-menu');
     })
 
-    // Show mobile list on tabs
+    // Show tabs
     .on('click', '.js-tab-link', function () {
         let $li = $(this),
             $liParent = $li.closest('.js-tabs-list'),
@@ -37,7 +38,7 @@ $(function() {
 
         $modal.addClass('animation-hideModal');
         $('.wrapper').removeClass('is-show-modal');
-        setTimeout(() => $modal.removeClass('animation-hideModal is-on'), 500);
+        setTimeout(() => $modal.removeClass('animation-hideModal is-on'), 450);
     })
 
     // Form input label
@@ -64,8 +65,39 @@ $(function() {
 
     // Simple form validation
     .on('click', '.js-form-submit-btn', function () {
-        let valid = new validForm({
+        let valid = new ValidForm({
             'valid': true
         });
+    });
+    let source = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+    ];
+    let lang = new autocomplete({
+        element: $('.js-autocomplete'),
+        length: 1,
+        source: source,
+        filter: 'direct',
+        appendTo: $('.autocomplete-menu')
     })
 });

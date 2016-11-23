@@ -65,3 +65,54 @@
         -o-transition: transform .5s linear
         transition: transform .5s linear
 
+.menu
+  background: #272727
+  position: fixed
+  left: 0
+  top: 0
+  height: 100%
+  width: 0
+  overflow: hidden
+  z-index: 100
+  -webkit-transition: width .2s linear
+  -moz-transition: width .2s linear
+  -o-transition: width .2s linear
+  transition: width .2s linear
+
+  @include breakpoint($tablet-breakpoint)
+    width: 100%
+    position: relative
+    height: 48px
+    display: block
+    padding: 0
+    z-index: 98
+
+  &__navbar
+    padding: 30px
+    @include grid-span(8,1)
+
+    @include breakpoint($tablet-breakpoint)
+      @include grid-span(12,1)
+      padding: 0
+
+    @include breakpoint($desktop-breakpoint)
+      @include grid-span(16,1)
+
+    li
+      display: block
+      line-height: 48px
+
+      @include breakpoint($tablet-breakpoint)
+        display: inline-block
+
+      a
+        text-transform: uppercase
+        font-size: 15px
+        color: rgb(255, 255, 255)
+        font-weight: bold
+        display: inline-block
+        margin-right: 20px
+        &:hover
+          color: $active-color
+
+

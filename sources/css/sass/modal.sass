@@ -1,10 +1,10 @@
 .modal 
   width: 400px
-  height: 300px
+  height: 320px
   position: fixed
   top: 50%
   left: 50%
-  margin-top: -150px
+  margin-top: -160px
   margin-left: -200px
   border-radius: 4px
   z-index: 100
@@ -44,6 +44,7 @@
   &__row
     position: relative
     margin-bottom: 10px
+    min-height: 61px
 
     .form__input
       display: block
@@ -70,6 +71,14 @@
       -moz-transition: all .2s linear
       -o-transition: all .2s linear
       transition: all .2s linear
+
+    .form__message
+      display: none
+      font-size: 11px
+      color: $active-color
+
+      &.is-error
+        display: block
 
     &.is-active
       label

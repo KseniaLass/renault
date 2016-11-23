@@ -126,79 +126,79 @@
       &.is-active
         display: block
 
-      .products__view-product
-        padding-bottom: 25px
-        @include sgs-change('gutter styles', 'split')
-        @include grid-span (8, 1)
+    .products__view
+      padding-bottom: 25px
+      @include sgs-change('gutter styles', 'split')
+      @include grid-span (8, 1)
 
-        @include breakpoint($tablet-breakpoint) 
-          @include grid-span(12, 1)
-          padding-bottom: 42px
-        
-        @include breakpoint($desktop-breakpoint) 
-          @include grid-span(7, 1)
-        
-        h4 
-          font-size: 30px
-          color: $text-color
-          font-weight: bold
-          text-transform: uppercase
-          padding: 0 0 30px
-          line-height: 1.3
-
-          @include breakpoint($desktop-breakpoint) 
-            font-size: 25px
-
-    .products__img
-      text-align: center
+      @include breakpoint($tablet-breakpoint)
+        @include grid-span(12, 1)
+        padding-bottom: 42px
 
       @include breakpoint($desktop-breakpoint)
-        padding: 68px 7px 0 20px
+        @include grid-span(7, 1)
 
-        img
-          width: 50%
-          max-width: 285px
+      h4
+        font-size: 30px
+        color: $text-color
+        font-weight: bold
+        text-transform: uppercase
+        padding: 0 0 30px
+        line-height: 1.3
 
-      .products__about-product
-        padding-bottom: 44px
-        @include grid-span(8,1)
+        @include breakpoint($desktop-breakpoint)
+          font-size: 25px
 
-        @include breakpoint($tablet-breakpoint) 
-          @include grid-span(12, 1)
-          padding-bottom: 35px
-        
-        @include breakpoint($desktop-breakpoint) 
-          @include grid-span(8, 9)
-          padding-top: 5px
-          padding-bottom: 57px
-        
-        p 
-          font-size: 24px
-          margin-bottom: 26px
+      .products__img
+        text-align: center
 
-          @include breakpoint($tablet-breakpoint) 
-            font-size: 20px
+        @include breakpoint($desktop-breakpoint)
+          padding: 68px 7px 0 20px
+
+          img
+            width: 50%
+            max-width: 285px
+
+    .products__about
+      padding-bottom: 44px
+      @include grid-span(8,1)
+
+      @include breakpoint($tablet-breakpoint)
+        @include grid-span(12, 1)
+        padding-bottom: 35px
+
+      @include breakpoint($desktop-breakpoint)
+        @include grid-span(8, 9)
+        padding-top: 5px
+        padding-bottom: 57px
+
+      p
+        font-size: 24px
+        margin-bottom: 26px
+
+        @include breakpoint($tablet-breakpoint)
+          font-size: 20px
+          margin-bottom: 20px
+
+        @include breakpoint($desktop-breakpoint)
+          font-size: 16px
+          min-height: 60px
+
+      .products__advans
+        margin-top: 35px
+
+        @include breakpoint($tablet-breakpoint)
+          margin-top: 53px
+
+        .products__advan
+          position: relative
+          margin-bottom: 10px
+
+          @include breakpoint($tablet-breakpoint)
             margin-bottom: 20px
-          
-          @include breakpoint($desktop-breakpoint) 
-            font-size: 16px
-            min-height: 60px
 
-        .products__advans
-          margin-top: 35px
-
-          @include breakpoint($tablet-breakpoint) 
-            margin-top: 53px
-
-          .products__advan
-            position: relative
-            margin-bottom: 10px
-
-            @include breakpoint($tablet-breakpoint) 
-              margin-bottom: 20px
-            
-            @include breakpoint($desktop-breakpoint) 
-              margin-bottom: 8px
+          @include breakpoint($desktop-breakpoint)
+            margin-bottom: 8px
 
       .products__img
               position: absolute
@@ -206,7 +206,7 @@
               margin-top: -30px
               left: 3px
 
-              @include breakpoint($desktop-breakpoint) 
+              @include breakpoint($desktop-breakpoint)
                 margin-top: -38px
                 left: 0
 
@@ -220,16 +220,16 @@
               box-sizing: border-box
               margin-left: 50px
 
-              @include breakpoint($desktop-breakpoint) 
+              @include breakpoint($desktop-breakpoint)
                 padding: 18px 30px
-              
-              strong, span 
+
+              strong, span
                 font-size: 18px
                 display: inline-block
                 width: 100%
 
-                @include breakpoint($tablet-breakpoint) 
+                @include breakpoint($tablet-breakpoint)
                   font-size: 16px
-                
-                @include breakpoint($desktop-breakpoint) 
+
+                @include breakpoint($desktop-breakpoint)
                   font-size: 14px

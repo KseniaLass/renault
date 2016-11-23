@@ -1,9 +1,9 @@
-class validFormBas {
+class ValidFormBas {
 	constructor(options) {
 		this.options = options;
 	}
 }
-export default class validForm extends validFormBas {
+export default class ValidForm extends ValidFormBas {
 	constructor(options) {
 		super(options);
 		this.el = {
@@ -22,18 +22,21 @@ export default class validForm extends validFormBas {
 		this.el.$validItem.each(function() {
 			let $curItem = $(this),
 				dataItem = $curItem.data('validation'),
-				curValue = $curItem.val();
+				curValue = $curItem.val(),
+				$message = $curItem.closest('.form__row').find('.js-form-message');
 
 			switch(dataItem) {
 				case 'login':
 					if(!self.__isLogin(curValue)) {
 						self.__showError($curItem);
+						$message.addClass('is-error');
 						return error = true;
 					}
 					break;
 				case 'pass':
 					if(!self.__isPassword(curValue)) {
 						self.__showError($curItem);
+						$message.addClass('is-error');
 						return error = true;
 					}
 					break;

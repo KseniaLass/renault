@@ -23,12 +23,12 @@
         .products__tabs-content.js-tabs-content
             - for (var x=0; x < products.length; x++)
                 div(class=""+ x==0 ? 'products__tab js-tab is-active' :'products__tab js-tab'+"" data-link=""+products[x]+"")
-                    .products__view-product
+                    .products__view
                         h4 PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] — это полнорационный влажный корм для котят
                         .products__img
                             img(src='../img/product2.png')
                             img(src='../img/product1.png')
-                    .products__about-product
+                    .products__about
                         p Вкусные кусочки курицы в желе и кусочки гриль  в соусе разработаны специально для растущего организма котят и рекомендованы для беременных  и кормящих кошек.
                         p PRO PLAN#[sup &reg;] #{products[x]}#[sup &reg;] обеспечивает все потребности организма котенка и является надежной основой для здорового старта.
                         .products__advans
