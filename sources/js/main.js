@@ -1,6 +1,7 @@
 // main bundle >> main.bundle.js
 import ValidForm from './modules/module.validForm';
 import autocomplete from './modules/module.autocomplete';
+import canvas from './modules/module.canvas';
 
 $(function() {
 
@@ -99,5 +100,6 @@ $(function() {
         source: source,
         filter: 'direct',
         appendTo: $('.autocomplete-menu')
-    })
+    });
+    let newCanvas = new canvas();
 });
