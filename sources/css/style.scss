@@ -27,6 +27,14 @@ body {
 	height: 100%;
 	width: 100%;
 }
+.learning__row {
+	margin: 20px 10px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 
 
 @import 'sass/main';

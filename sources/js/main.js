@@ -1,7 +1,7 @@
 // main bundle >> main.bundle.js
 import ValidForm from './modules/module.validForm';
 import autocomplete from './modules/module.autocomplete';
-import canvas from './modules/module.canvas';
+import stringFormat from './modules/module.stringFormat'
 
 $(function() {
 
@@ -70,6 +70,7 @@ $(function() {
             'valid': true
         });
     });
+
     let source = [
         "ActionScript",
         "AppleScript",
@@ -101,5 +102,20 @@ $(function() {
         filter: 'direct',
         appendTo: $('.autocomplete-menu')
     });
-    let newCanvas = new canvas();
+    // StringFormat
+
+    // let stringDigits = new stringFormat({
+    //     "element": $(".js-stringDigits")
+    // });
+
+    // let stringCut = new stringFormat({
+    //     "element": $(".js-stringCut")
+    // });
+    // let stringDeclension = new stringFormat({
+    //     "element": $(".js-stringDeclension")
+    // });
+        let stringToText = new stringFormat({
+            "element": $(".js-stringToText")
+        });
+
 });
