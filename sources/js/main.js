@@ -105,17 +105,17 @@ $(function() {
     // StringFormat
 
     // let stringDigits = new stringFormat({
-    //     "element": $(".js-stringDigits")
+    //     "element": ".js-stringDigits"
     // });
-
+	//
     // let stringCut = new stringFormat({
-    //     "element": $(".js-stringCut")
+    //     "element": ".js-stringCut"
     // });
     // let stringDeclension = new stringFormat({
-    //     "element": $(".js-stringDeclension")
+    //     "element": ".js-stringDeclension"
     // });
-        let stringToText = new stringFormat({
-            "element": $(".js-stringToText")
-        });
+    let stringToText = new stringFormat({
+        "element": ".js-stringToText"
+    });
 
 });

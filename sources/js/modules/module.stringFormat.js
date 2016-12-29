@@ -7,115 +7,135 @@ export default class stringFormat extends stringFormatBase {
 	constructor(options) {
 		super(options);
 		this.el = {
-			$container: options.element || 'Элемент не задан'
+			container: options.element || 'Элемент не задан'
 		};
 
-		this.input = this.el.$container.find('.js-input');
-		this.result = this.el.$container.find('.js-result');
-
-		$('body').on('keyup', this.input, (e) => {
-			let method = $(e.target).data('method'),
-				type = $(e.target).attr('type');
-				switch(method) {
-					case 'digits':
-						this.__setDigits();
-						break;
-					case 'cut':
-						this.__setCut();
-						break;
-					case 'declension':
-						this.__setDeclension();
-						break;
-					case 'toText':
-						this.__setToText();
-						break;
-				}
+		$('body').on('keyup', $(this.el.container).find('input'), (e) => {
+			let container = $(e.target).closest(this.el.container),
+				value = $(e.target).val(),
+				method = $(e.target).data('method'),
+				string = '';
+			switch(method) {
+				case 'digits':
+					string = this.__setDigits(value);
+					break;
+				case 'cut':
+					string = this.__setCut(value);
+					break;
+				case 'declension':
+					string = this.__setDeclension(value);
+					break;
+				case 'toText':
+					string = this.__setToText(value);
+					break;
+			}
+			this.__setResult(string, container);
 		});
 	}
 
-	__setDigits() {
-		let inputValue = this.input.val(),
-			string = inputValue.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
-		this.__setResult(string);
+	__setPhraseIndex(number) {
+		var numString = number.toString(),
+			lastChar = numString.charAt(numString.length-1),
+			titles;
+		if (number >= 11 && number <=14){
+			titles = 3;
+		} else if (lastChar == 1) {
+			titles = 1;
+		} else if (lastChar >= 2 && lastChar <= 4) {
+			titles = 2;
+		} else if (lastChar === 0 || lastChar > 5) {
+			titles = 3;
+		}
+		return titles;
+	}
+	__setNumberSeparate(number) {
+		let numString = number.toString(),
+			string = numString.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+		return string;
 	}
 
-	__setCut() {
-		let inputValue = this.input.val(),
-			string = inputValue.slice(0, 14);
-		if (string.length < inputValue.length) {
+
+	__setDigits(value) {
+		let string = this.__setNumberSeparate(value);
+		return string;
+		//this.__setResult(string.join(' '));
+	}
+
+	__setCut(value) {
+		let string = value.slice(0, 14);
+		if (string.length < value.length) {
 			string += "..."
 		}
-		this.__setResult(string);
+		return string;
+		//this.__setResult(string);
 	}
-	__setDeclension() {
-		let inputValue = this.input.val(),
-			num = +inputValue,
-			last = +inputValue.charAt(inputValue.length - 1),
-			word,
-			phrase = `${inputValue}  ${word}`;
-		if (num >= 11 && num <= 14){
-			word = 'штук';
-		} else if (num === 1 || last === 1) {
-			word = 'штука';
-		} else if (last >= 2 && last <= 4) {
-			word = 'штуки';
-		} else {
-			word = 'штук';
+
+	__setDeclension(value) {
+		let index = this.__setPhraseIndex(value),
+			phrase = '';
+		switch(index) {
+			case 1:
+				phrase = 'штука';
+				break;
+			case 2:
+				phrase = 'штуки';
+				break;
+			case 3:
+				phrase = 'штук';
+				break;
 		}
-		this.__setResult(phrase);
+		return phrase;
+		//this.__setResult(phrase);
 	}
-	__setToText() {
-		var valueStr = this.input.val(),
-			valueNum = +valueStr,
-			valueArr = (""+valueStr).split(""),
-			valueStrLen = valueStr.length,
+
+	__setToText(value) {
+		var stringArr = [],
+			indexArr = [],
 			string = '',
+			rankStr = this.__setNumberSeparate(value),
+			rank = rankStr.split(' '),
 
 			a1 = ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
 			a2 = ['', 'одна','две','три','четыре','пять','шесть','семь','восемь','девять'],
 			a10 = ['одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать'],
 			a20 = ['', '', 'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят','восемьдесят','девяносто'],
 			a100 = ['', 'сто','двести','триста','четыреста','пятьсот','шестьсот','семьсот','восемьсот','девятьсот'],
+			thousand = ["", "тысяча", "тысячи", "тысяч"],
+			million = ["", "миллион", "миллиона", "миллионов"];
 
-			unit = a1[valueArr[valueStr.length-1]], //переделать в сабстринг?
-			decade = a20[valueArr[valueStr.length-2]],
-			hundred = a100[valueArr[valueStr.length-3]],
-			thousand = valueStrLen === 4 ? a1[valueArr[valueStrLen-4]],
-			million = a1[valueArr[valueStr.length-5]];
 
-		if(valueNum < 20) {
-			string = a1[valueNum];
-		} else if (valueStrLen === 2) {
-			string = `${decade} ${unit}`;
-		} else if (valueStrLen === 3) {
-			string = `${hundred} ${decade} ${unit}`;
-		} else if (valueStrLen === 4) {
-			string = `${thousand} тысяча ${hundred} ${decade} ${unit}`;
-		} else if (valueStrLen === 5) {
-			string = `${thousand} тысяч ${hundred} ${decade} ${unit}`;
-		}
 
-		// if(num < 10) { //0-9
-		// 	string = a1[num];
-		// } else if (num >= 10 && num < 20) {//10-19
-		// 	string = a10[inputValue.charAt(inputValue.length - 1)]
-		// } else if (num > 20 && num < 100) {//20-99
-		// 	string = `${a20[digits[0]]} ${a1[digits[1]]}`
-		// } else if (num >= 100 && num < 1000) {//100-999
-		// 	string = `${a100[digits[0]]} ${a20[digits[1]]} ${a1[digits[2]]}`
-		// } else if (num >= 1000 && num < 2000) {//1000-1999
-		// 	string = `${a2[digits[0]]} тысяча ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
-		// } else if (num >= 2000 && num < 5000) {//2000-4999
-		// 	string = `${a2[digits[0]]} тысячи ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
-		// } else if (num >= 5000 && num < 10000) {//5000-9999
-		// 	string = `${a2[digits[0]]} тысяч ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
-		// }
+			if(value != '') {
+				for (let i = 0; i < rank.length; i++) {
+					let num = +rank[i],
+						first = rank[i].charAt(0),
+						sec = rank[i].charAt(1),
+						last = rank[i].charAt(rank[i].length - 1);
+					indexArr.push(this.__setPhraseIndex(last));
+					if(num < 20) {
+						stringArr.push(a1[num])
+					} else if (num < 99) {
+						stringArr.push(`${a20[first]} ${a1[sec]}`)
+					} else if (num > 100) {
+						stringArr.push(`${a100[first]} ${a20[sec]} ${a1[last]}`)
+					}
+				}
+				if(rank.length === 3) {
+					string = `${stringArr[0]} ${million[indexArr[1]]} ${stringArr[1]} ${thousand[indexArr[0]]} ${stringArr[2]}`;
+				}
+				if(rank.length === 2) {
+					string = `${stringArr[0]} ${thousand[indexArr[0]]} ${stringArr[1]}`;
+				}
+				if(rank.length === 1) {
+					string = `${stringArr[0]}`;
+				}
+			}
 
-		this.__setResult(string);
+		return string;
 	}
 
-	__setResult(value) {
-		this.result.html(`<strong> ${value}</strong>`);
+	__setResult(value, container) {
+		$(container).find('.js-result').html(`<strong> ${value}</strong>`);
 	}
 
 }
