@@ -65,22 +65,51 @@ export default class stringFormat extends stringFormatBase {
 		this.__setResult(phrase);
 	}
 	__setToText() {
-		let inputValue = this.input.val(),
-			num = +inputValue,
-			string,
-			a1 = ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять'],
+		var valueStr = this.input.val(),
+			valueNum = +valueStr,
+			valueArr = (""+valueStr).split(""),
+			valueStrLen = valueStr.length,
+			string = '',
+
+			a1 = ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
 			a2 = ['', 'одна','две','три','четыре','пять','шесть','семь','восемь','девять'],
-			a10 = ['десять','одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать'],
-			a20 = ['', 'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят','восемьдесят','девяносто'],
-			a100 = ['', 'сто','двести','триста','четыреста','пятьсот','шестьсот','семьсот','восемьсот','девятьсот'];
+			a10 = ['одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать'],
+			a20 = ['', '', 'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят','восемьдесят','девяносто'],
+			a100 = ['', 'сто','двести','триста','четыреста','пятьсот','шестьсот','семьсот','восемьсот','девятьсот'],
 
-			//digits = (""+inputValue).split("");
+			unit = a1[valueArr[valueStr.length-1]], //переделать в сабстринг?
+			decade = a20[valueArr[valueStr.length-2]],
+			hundred = a100[valueArr[valueStr.length-3]],
+			thousand = valueStrLen === 4 ? a1[valueArr[valueStrLen-4]],
+			million = a1[valueArr[valueStr.length-5]];
 
-		if(num < 10) {
-			string = a1[num];
-		} else if (num > 10 && num < 20) {
-			string = a10[inputValue.charAt(inputValue.length - 1)]
+		if(valueNum < 20) {
+			string = a1[valueNum];
+		} else if (valueStrLen === 2) {
+			string = `${decade} ${unit}`;
+		} else if (valueStrLen === 3) {
+			string = `${hundred} ${decade} ${unit}`;
+		} else if (valueStrLen === 4) {
+			string = `${thousand} тысяча ${hundred} ${decade} ${unit}`;
+		} else if (valueStrLen === 5) {
+			string = `${thousand} тысяч ${hundred} ${decade} ${unit}`;
 		}
+
+		// if(num < 10) { //0-9
+		// 	string = a1[num];
+		// } else if (num >= 10 && num < 20) {//10-19
+		// 	string = a10[inputValue.charAt(inputValue.length - 1)]
+		// } else if (num > 20 && num < 100) {//20-99
+		// 	string = `${a20[digits[0]]} ${a1[digits[1]]}`
+		// } else if (num >= 100 && num < 1000) {//100-999
+		// 	string = `${a100[digits[0]]} ${a20[digits[1]]} ${a1[digits[2]]}`
+		// } else if (num >= 1000 && num < 2000) {//1000-1999
+		// 	string = `${a2[digits[0]]} тысяча ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
+		// } else if (num >= 2000 && num < 5000) {//2000-4999
+		// 	string = `${a2[digits[0]]} тысячи ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
+		// } else if (num >= 5000 && num < 10000) {//5000-9999
+		// 	string = `${a2[digits[0]]} тысяч ${a100[digits[1]]} ${a20[digits[2]]} ${a1[digits[3]]}`
+		// }
 
 		this.__setResult(string);
 	}
