@@ -104,16 +104,16 @@ $(function() {
     });
     // StringFormat
 
-    // let stringDigits = new stringFormat({
-    //     "element": ".js-stringDigits"
-    // });
-	//
-    // let stringCut = new stringFormat({
-    //     "element": ".js-stringCut"
-    // });
-    // let stringDeclension = new stringFormat({
-    //     "element": ".js-stringDeclension"
-    // });
+    let stringDigits = new stringFormat({
+        "element": ".js-stringDigits"
+    });
+
+    let stringCut = new stringFormat({
+        "element": ".js-stringCut"
+    });
+    let stringDeclension = new stringFormat({
+        "element": ".js-stringDeclension"
+    });
     let stringToText = new stringFormat({
         "element": ".js-stringToText"
     });
