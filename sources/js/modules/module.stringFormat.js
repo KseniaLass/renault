@@ -47,7 +47,7 @@ export default class stringFormat extends stringFormatBase {
 			titles = phrase[0];
 		} else if (lastChar >= 2 && lastChar <= 4) {
 			titles = phrase[1];
-		} else if (lastChar === 0 || lastChar >= 5) {
+		} else if (lastChar == 0 || lastChar >= 5) {
 			titles = phrase[2];
 		}
 		return titles;
@@ -58,10 +58,8 @@ export default class stringFormat extends stringFormatBase {
 		return string;
 	}
 	__setTextDigit(digit, length) {
-		let phrase,
-			num = +digit,
+		let num = +digit,
 			words,
-			//unit,
 			text = {
 				a1 : ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
 				a2 : ['', 'одна','две'],
@@ -81,20 +79,17 @@ export default class stringFormat extends stringFormatBase {
 			}
 		} else if (num >= 20 && num < 99) {
 			words = `${text.a20[first]} ${text.a1[sec]}`
-		} else if (num > 100) {
+		} else if (num >= 100) {
 			if(sec == 1) {
 				words = `${text.a100[first]} ${text.a1[sec+last]}`
 			} else {
 				words = `${text.a100[first]} ${text.a20[sec]} ${text.a1[last]}`
 			}
+		} else if (num == 0) {
+			words = ``;
 		}
 		return words;
 	}
-
-	__setGenderIndex(index, phrase) {
-
-	}
-
 
 	//Work methods
 	__setDigits(value) {
@@ -113,29 +108,30 @@ export default class stringFormat extends stringFormatBase {
 		return `${value} ${index}`;
 	}
 	__setToText(value) {
-		var string = '',
-			textArr = [],
-			rankStr = this.__setNumberSeparate(value),
-			rank = rankStr.split(' '),
-			num = +rank,
+		let separate = this.__setNumberSeparate(value),
+			digit = separate.split(' '),
+			result = [],
+			phrase = '',
 			thousend,
-			million,
-			unit = '';
-		if(value != '') {
-			for (let i = 0; i < rank.length; i++) {
-				let num = +rank;
-				textArr.push(this.__setTextDigit(rank[i], rank.length));
+			million;
+		for(let i = 0; i <digit.length; i++) {
+			result.push(this.__setTextDigit(digit[i], digit.length));
+			if(digit.length == 2) {
+				thousend = this.__setPhraseIndex(digit[0], ["тысяча", "тысячи", "тысяч"]);
+				phrase = `${result[0]} ${thousend} ${result[1]}`
+			} else if (digit.length == 3) {
+				thousend = this.__setPhraseIndex(digit[1], ["тысяча", "тысячи", "тысяч"]),
+				million = this.__setPhraseIndex(digit[0], ["миллион", "миллиона", "миллионов"]);
+				if(result[1] == '') {
+					phrase = `${result[0]} ${million} ${result[1]} ${result[2]}`;
+				} else {
+					phrase = `${result[0]} ${million} ${result[1]} ${thousend} ${result[2]}`;
+				}
+			} else {
+				phrase = result[0]
 			}
 		}
-		if(textArr.length == 2) {
-			thousend = this.__setPhraseIndex(rank, ["тысяча", "тысячи", "тысяч"]);
-			textArr.splice(0, 0, thousend);
-		} else if(length == 3) {
-			million = this.__setPhraseIndex(rank, ["миллион", "миллиона", "миллионов"]);
-			textArr.splice(1, 0, million);
-		}
-		console.log(textArr)
-		return string;
+		return phrase;
 	}
 
 	__setResult(value, container) {
