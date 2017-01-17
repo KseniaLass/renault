@@ -74,12 +74,13 @@ export default class stringFormat extends stringFormatBase {
 			string = numString.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 		return string;
 	}
-	__setTextDigit(digit, length) {
+
+	__setTextDigit(digit, female) {
 		let num = +digit,
 			words,
 			text = {
 				a1 : ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
-				a2 : ['', 'одна','две'],
+				a2 : ['', 'одна','две','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
 				a10 : ['одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать'],
 				a20 : ['', '', 'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят','восемьдесят','девяносто'],
 				a100 : ['', 'сто','двести','триста','четыреста','пятьсот','шестьсот','семьсот','восемьсот','девятьсот']
@@ -88,28 +89,46 @@ export default class stringFormat extends stringFormatBase {
 			sec = digit.charAt(digit.length-2),
 			last = digit.charAt(digit.length-1);
 
-		if(num <= 19) {
-			if((length == 2) && (last == 1 || last == 2)) {
-				words = `${text.a2[num]}`;
-			} else {
-				words = `${text.a1[num]}`;
+
+			if(num <= 19) {
+				if(female == true) {
+					words = `${text.a2[num]}`;
+				} else {
+					words = `${text.a1[num]}`;
+				}
+			} else if (num >= 20 && num < 99) {
+				if(last == 0) {
+					words = `${text.a20[sec]} ${text.a20[last]}`
+				} else {
+					words = `${text.a20[sec]} ${text.a1[last]}`
+				}
+			} else if (num >= 100) {
+				if(sec == 1) {
+					words = `${text.a100[first]} ${text.a1[sec+last]}`
+				} else {
+					words = `${text.a100[first]} ${text.a20[sec]} ${text.a1[last]}`
+				}
+			} else if (num == 0) {
+				words = ``;
 			}
-		} else if (num >= 20 && num < 99) {
-			if(last == 0) {
-				words = `${text.a20[sec]} ${text.a20[last]}`
-			} else {
-				words = `${text.a20[sec]} ${text.a1[last]}`
-			}
-		} else if (num >= 100) {
-			if(sec == 1) {
-				words = `${text.a100[first]} ${text.a1[sec+last]}`
-			} else {
-				words = `${text.a100[first]} ${text.a20[sec]} ${text.a1[last]}`
-			}
-		} else if (num == 0) {
-			words = ``;
-		}
 		return words;
+	}
+
+	__setArrayDigit(digit) {
+		let phrase,
+			thousend,
+			million;
+		if(digit.length == 1) {
+			phrase = `${this.__setTextDigit(digit[0])}`;
+		} else if (digit.length == 2) {
+			thousend = this.__setPhraseIndex(digit[0], ["тысяча", "тысячи", "тысяч"]);
+			phrase = `${this.__setTextDigit(digit[0], true)} ${thousend} ${this.__setTextDigit(digit[1])}`;
+		} else if (digit.length == 3) {
+			thousend = this.__setPhraseIndex(digit[1], ["тысяча", "тысячи", "тысяч"]);
+			million = this.__setPhraseIndex(digit[0], ["миллион", "миллиона", "миллионов"])
+			phrase = `${this.__setTextDigit(digit[0])} ${million} ${this.__setTextDigit(digit[1])} ${thousend} ${this.__setTextDigit(digit[2])}`
+		}
+		console.log(phrase)
 	}
 
 	//Work methods
@@ -131,31 +150,10 @@ export default class stringFormat extends stringFormatBase {
 	__setToText(value) {
 		let separate = this.__setNumberSeparate(value),
 			digit = separate.split(' '),
-			result = [],
-			phrase = '',
-			thousend,
-			million;
-		for(let i = 0; i <digit.length; i++) {
-			//result.push(this.__setTextDigit(digit[i], digit.length));
-			if(digit.length == 2) {
-				result.push(this.__setTextDigit(digit[i], 2));
-				thousend = this.__setPhraseIndex(digit[0], ["тысяча", "тысячи", "тысяч"]);
-				phrase = `${result[0]} ${thousend} ${result[1]}`
-			} else if (digit.length == 3) {
-				result.push(this.__setTextDigit(digit[i], 3));
-				thousend = this.__setPhraseIndex(digit[1], ["тысяча", "тысячи", "тысяч"]);
-				million = this.__setPhraseIndex(digit[0], ["миллион", "миллиона", "миллионов"]);
-				if(result[1] == '') {
-					phrase = `${result[0]} ${million} ${result[1]} ${result[2]}`;
-				} else {
-					phrase = `${result[0]} ${million} ${result[1]} ${thousend} ${result[2]}`;
-				}
-			} else {
-				result.push(this.__setTextDigit(digit[i], 0));
-				phrase = result[0]
-			}
-			console.log(result)
-		}
+			phrase = '';
+
+			this.__setArrayDigit(digit);
+
 		return phrase;
 	}
 
