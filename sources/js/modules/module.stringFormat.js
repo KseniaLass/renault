@@ -14,9 +14,7 @@
  * __setCut(value) - замена слишком длинных строк "...". (value) -строка, значение.
  * __setDeclension(value) - склонение существительного (см. __setNumberSeparate()).
  * __setToText(value) - перевод числового значения в слова. Разбиваем значние на разряды (__setNumberSeparate()), вызываем __setArrayDigit();
- *
- * __setResult(value, container) - вывод результатов. (value) - значение, полученое из рабочих методов. (container) - указывается в options;
- *
+ * __setResult(value, container) - вывод результатов. (value) - значение, полученое из рабочих методов. (container) - указывается в options; *
  *
  */
 class stringFormatBase {
