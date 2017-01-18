@@ -27,7 +27,8 @@ export default class stringFormat extends stringFormatBase {
 		super(options);
 
 		this.el = {
-			container: options.element || 'Элемент не задан'
+			container: options.element || 'Элемент не задан',
+			result: options.element || $('body')
 		};
 
 		this.$input = $(this.el.container).find('input');
@@ -48,7 +49,12 @@ export default class stringFormat extends stringFormatBase {
 					string = this.__setDeclension(value);
 					break;
 				case 'toText':
-					string = this.__setToText(value);
+					if (value.length < 9) {
+						string = this.__setToText(value);
+					} else {
+						this.__setResult('Значение должно быть меньше 9 символов', this.el.container);
+						return false;
+					}
 					break;
 			}
 			this.__setResult(string, container);
@@ -148,8 +154,14 @@ export default class stringFormat extends stringFormatBase {
 		return string;
 	}
 	__setDeclension(value) {
-		let index = this.__setPhraseIndex(value, ['штука', 'штуки','штук']);
-		return `${value} ${index}`;
+		let index = this.__setPhraseIndex(value, ['штука', 'штуки', 'штук']),
+			phrase;
+		if (value != '') {
+			phrase = `${value} ${index}`;
+		} else {
+			phrase = '';
+		}
+		return phrase;
 	}
 	__setToText(value) {
 		let separate = this.__setNumberSeparate(value),
@@ -158,6 +170,6 @@ export default class stringFormat extends stringFormatBase {
 		return phrase;
 	}
 	__setResult(value, container) {
-		$(container).find('.js-result').html(`<strong> ${value}</strong>`);
+		$(container).find(this.options.result).html(`<strong> ${value}</strong>`);
 	}
 }
