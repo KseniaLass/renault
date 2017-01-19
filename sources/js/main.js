@@ -105,20 +105,20 @@ $(function() {
     // StringFormat
 
     let stringDigits = new stringFormat({
-        "element": ".js-stringDigits",
+        "container": ".js-stringDigits",
         "result": ".js-digitResult"
     });
 
     let stringCut = new stringFormat({
-        "element": ".js-stringCut",
+        "container": ".js-stringCut",
         "result": ".js-cutResult"
     });
     let stringDeclension = new stringFormat({
-        "element": ".js-stringDeclension",
+        "container": ".js-stringDeclension",
         "result": ".js-declensionResult"
     });
     let stringToText = new stringFormat({
-        "element": ".js-stringToText",
+        "container": ".js-stringToText",
         "result": ".js-toTextResult"
     });
 

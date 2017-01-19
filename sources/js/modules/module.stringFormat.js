@@ -11,10 +11,10 @@
  * * * * Рабочие методы
  *
  * __setDigits(value) - добавление пробелов между разрядами (см. __setNumberSeparate());
- * __setCut(value) - замена слишком длинных строк "...". (value) -строка, значение.
- * __setDeclension(value) - склонение существительного (см. __setNumberSeparate()).
+ * __setCut(value) - замена слишком длинных строк "...". (value) -строка, значение;
+ * __setDeclension(value) - склонение существительного (см. __setNumberSeparate());
  * __setToText(value) - перевод числового значения в слова. Разбиваем значние на разряды (__setNumberSeparate()), вызываем __setArrayDigit();
- * __setResult(value, container) - вывод результатов. (value) - значение, полученое из рабочих методов. (container) - указывается в options; *
+ * __setResult(value, container) - вывод результатов. (value) - значение, полученое из рабочих методов;
  *
  */
 class stringFormatBase {
@@ -27,8 +27,8 @@ export default class stringFormat extends stringFormatBase {
 		super(options);
 
 		this.el = {
-			container: options.element || 'Элемент не задан',
-			result: options.element || $('body')
+			container: options.container || 'Элемент не задан',
+			result: options.result || $('body')
 		};
 
 		this.$input = $(this.el.container).find('input');
@@ -169,7 +169,8 @@ export default class stringFormat extends stringFormatBase {
 			phrase = this.__setArrayDigit(digit);
 		return phrase;
 	}
-	__setResult(value, container) {
-		$(container).find(this.options.result).html(`<strong> ${value}</strong>`);
+
+	__setResult(value) {
+		$(this.el.container).find(this.el.result).html(`<strong> ${value}</strong>`);
 	}
 }
