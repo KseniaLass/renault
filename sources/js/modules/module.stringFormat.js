@@ -28,7 +28,7 @@ export default class stringFormat extends stringFormatBase {
 
 		this.el = {
 			container: options.container || 'Элемент не задан',
-			result: options.result || $('body'),
+			result: options.result || $('body')
 		};
 
 		this.$input = $(this.el.container).find('input');
@@ -39,27 +39,27 @@ export default class stringFormat extends stringFormatBase {
 				method = $(e.target).data('method'),
 				string = '';
 			switch (method) {
-			case 'digits':
-				string = this.__setDigits(value);
-				break;
-			case 'cut':
-				string = this.__setCut(value);
-				break;
-			case 'declension':
-				string = this.__setDeclension(value);
-				break;
-			case 'toText':
-				if (value.length < 9) {
-					string = this.__setToText(value);
-				} else {
-					this.__setResult(
-						'Значение должно быть меньше 9 символов',
-						this.el.container
-					);
-					return false;
+				case 'digits':
+					string = this.__setDigits(value);
+					break;
+				case 'cut':
+					string = this.__setCut(value);
+					break;
+				case 'declension':
+					string = this.__setDeclension(value);
+					break;
+				case 'toText':
+					if (value.length < 9) {
+							string = this.__setToText(value);
+					} else {
+						this.__setResult(
+							'Значение должно быть меньше 9 символов',
+							this.el.container
+						);
+						return false;
+					}
+					break;
 				}
-				break;
-			}
 			this.__setResult(string, container);
 		});
 	}
@@ -110,7 +110,7 @@ export default class stringFormat extends stringFormatBase {
 					'шестнадцать',
 					'семнадцать',
 					'восемнадцать',
-					'девятнадцать',
+					'девятнадцать'
 				],
 				a2: [
 					'',
@@ -132,7 +132,7 @@ export default class stringFormat extends stringFormatBase {
 					'шестнадцать',
 					'семнадцать',
 					'восемнадцать',
-					'девятнадцать',
+					'девятнадцать'
 				],
 				a10: [
 					'одиннадцать',
@@ -143,7 +143,7 @@ export default class stringFormat extends stringFormatBase {
 					'шестнадцать',
 					'семнадцать',
 					'восемнадцать',
-					'девятнадцать',
+					'девятнадцать'
 				],
 				a20: [
 					'',
@@ -155,7 +155,7 @@ export default class stringFormat extends stringFormatBase {
 					'шестьдесят',
 					'семьдесят',
 					'восемьдесят',
-					'девяносто',
+					'девяносто'
 				],
 				a100: [
 					'',
@@ -167,8 +167,8 @@ export default class stringFormat extends stringFormatBase {
 					'шестьсот',
 					'семьсот',
 					'восемьсот',
-					'девятьсот',
-				],
+					'девятьсот'
+				]
 			},
 			first = digit.charAt(digit.length - 3),
 			sec = digit.charAt(digit.length - 2),
@@ -196,7 +196,7 @@ export default class stringFormat extends stringFormatBase {
 				words = `${text.a100[first]} ${text.a20[sec]} ${tens[last]}`;
 			}
 		} else if (num == 0) {
-			words = ``;
+			words = '';
 		}
 		return words;
 	}
@@ -218,7 +218,7 @@ export default class stringFormat extends stringFormatBase {
 			million = this.__setPhraseIndex(digit[0], [
 				'миллион',
 				'миллиона',
-				'миллионов',
+				'миллионов'
 			]);
 			phrase = `${this.__setTextDigit(
 				digit[0]

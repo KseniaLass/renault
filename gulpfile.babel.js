@@ -164,7 +164,7 @@ gulp.task('dist:static', () => {
 
 gulp.task('lint', () => {
 	return gulp.src(SOURCES_DIR + '/js/**/*.js')
-		.pipe($.eslint())
+		.pipe($.eslint({fix: true}))
 		.pipe($.eslint.format());
 });
 
