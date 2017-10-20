@@ -5,7 +5,9 @@ env:
 extends: 'eslint:recommended'
 parserOptions:
   sourceType: module
+plugins: ['prettier']
 rules:
+  prettier/prettier: 'error'
   indent:
     - error
     - tab

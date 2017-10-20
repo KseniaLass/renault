@@ -28,34 +28,37 @@ export default class stringFormat extends stringFormatBase {
 
 		this.el = {
 			container: options.container || 'Элемент не задан',
-			result: options.result || $('body')
+			result: options.result || $('body'),
 		};
 
 		this.$input = $(this.el.container).find('input');
 
-		this.$input.on('keyup' , (e) => {
+		this.$input.on('keyup', e => {
 			let container = $(e.target).closest(this.el.container),
 				value = $(e.target).val(),
 				method = $(e.target).data('method'),
 				string = '';
-			switch(method) {
-				case 'digits':
-					string = this.__setDigits(value);
-					break;
-				case 'cut':
-					string = this.__setCut(value);
-					break;
-				case 'declension':
-					string = this.__setDeclension(value);
-					break;
-				case 'toText':
-					if (value.length < 9) {
-						string = this.__setToText(value);
-					} else {
-						this.__setResult('Значение должно быть меньше 9 символов', this.el.container);
-						return false;
-					}
-					break;
+			switch (method) {
+			case 'digits':
+				string = this.__setDigits(value);
+				break;
+			case 'cut':
+				string = this.__setCut(value);
+				break;
+			case 'declension':
+				string = this.__setDeclension(value);
+				break;
+			case 'toText':
+				if (value.length < 9) {
+					string = this.__setToText(value);
+				} else {
+					this.__setResult(
+						'Значение должно быть меньше 9 символов',
+						this.el.container
+					);
+					return false;
+				}
+				break;
 			}
 			this.__setResult(string, container);
 		});
@@ -64,10 +67,10 @@ export default class stringFormat extends stringFormatBase {
 	// Helpers
 	__setPhraseIndex(number, phrase) {
 		var numString = number.toString(),
-			lastChar = numString.substr(numString.length-1),
-			twoLast = numString.substr(numString.length-2),
+			lastChar = numString.substr(numString.length - 1),
+			twoLast = numString.substr(numString.length - 2),
 			titles;
-		if (twoLast >= 11 && twoLast <=14){
+		if (twoLast >= 11 && twoLast <= 14) {
 			titles = phrase[2];
 		} else if (lastChar == 1) {
 			titles = phrase[0];
@@ -87,56 +90,142 @@ export default class stringFormat extends stringFormatBase {
 		let num = +digit,
 			words,
 			text = {
-				a1 : ['', 'один','два','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
-				a2 : ['', 'одна','две','три','четыре','пять','шесть','семь','восемь','девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
-				a10 : ['одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать'],
-				a20 : ['', '', 'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят','восемьдесят','девяносто'],
-				a100 : ['', 'сто','двести','триста','четыреста','пятьсот','шестьсот','семьсот','восемьсот','девятьсот']
+				a1: [
+					'',
+					'один',
+					'два',
+					'три',
+					'четыре',
+					'пять',
+					'шесть',
+					'семь',
+					'восемь',
+					'девять',
+					'десять',
+					'одиннадцать',
+					'двенадцать',
+					'тринадцать',
+					'четырнадцать',
+					'пятнадцать',
+					'шестнадцать',
+					'семнадцать',
+					'восемнадцать',
+					'девятнадцать',
+				],
+				a2: [
+					'',
+					'одна',
+					'две',
+					'три',
+					'четыре',
+					'пять',
+					'шесть',
+					'семь',
+					'восемь',
+					'девять',
+					'десять',
+					'одиннадцать',
+					'двенадцать',
+					'тринадцать',
+					'четырнадцать',
+					'пятнадцать',
+					'шестнадцать',
+					'семнадцать',
+					'восемнадцать',
+					'девятнадцать',
+				],
+				a10: [
+					'одиннадцать',
+					'двенадцать',
+					'тринадцать',
+					'четырнадцать',
+					'пятнадцать',
+					'шестнадцать',
+					'семнадцать',
+					'восемнадцать',
+					'девятнадцать',
+				],
+				a20: [
+					'',
+					'',
+					'двадцать',
+					'тридцать',
+					'сорок',
+					'пятьдесят',
+					'шестьдесят',
+					'семьдесят',
+					'восемьдесят',
+					'девяносто',
+				],
+				a100: [
+					'',
+					'сто',
+					'двести',
+					'триста',
+					'четыреста',
+					'пятьсот',
+					'шестьсот',
+					'семьсот',
+					'восемьсот',
+					'девятьсот',
+				],
 			},
-			first = digit.charAt(digit.length-3),
-			sec = digit.charAt(digit.length-2),
-			last = digit.charAt(digit.length-1),
-
+			first = digit.charAt(digit.length - 3),
+			sec = digit.charAt(digit.length - 2),
+			last = digit.charAt(digit.length - 1),
 			tens;
 
-			if(gender == true) {
-				tens = text.a2;
-			} else {
-				tens = text.a1;
-			}
+		if (gender == true) {
+			tens = text.a2;
+		} else {
+			tens = text.a1;
+		}
 
-			if(num > 0 && num <= 19) {
-				words = `${tens[num]}`;
-			} else if (num >= 20 && num < 99) {
-				if(last == 0) {
-					words = `${text.a20[sec]} ${text.a20[last]}`
-				} else {
-					words = `${text.a20[sec]} ${tens[last]}`
-				}
-			} else if (num >= 100) {
-				if(sec == 1) {
-					words = `${text.a100[first]} ${tens[sec+last]}`
-				} else {
-					words = `${text.a100[first]} ${text.a20[sec]} ${tens[last]}`
-				}
-			} else if (num == 0) {
-				words = ``;
+		if (num > 0 && num <= 19) {
+			words = `${tens[num]}`;
+		} else if (num >= 20 && num < 99) {
+			if (last == 0) {
+				words = `${text.a20[sec]} ${text.a20[last]}`;
+			} else {
+				words = `${text.a20[sec]} ${tens[last]}`;
 			}
+		} else if (num >= 100) {
+			if (sec == 1) {
+				words = `${text.a100[first]} ${tens[sec + last]}`;
+			} else {
+				words = `${text.a100[first]} ${text.a20[sec]} ${tens[last]}`;
+			}
+		} else if (num == 0) {
+			words = ``;
+		}
 		return words;
 	}
 	__setArrayDigit(digit) {
-		let phrase,
-			thousend,
-			million;
-		if(digit.length == 1) {
+		let phrase, thousend, million;
+		if (digit.length == 1) {
 			phrase = `${this.__setTextDigit(digit[0])}`;
 		} else if (digit.length == 2) {
-			thousend = this.__setPhraseIndex(digit[0], ["тысяча", "тысячи", "тысяч"]);
-			phrase = `${this.__setTextDigit(digit[0], true)} ${thousend} ${this.__setTextDigit(digit[1])}`;
+			thousend = this.__setPhraseIndex(digit[0], ['тысяча', 'тысячи', 'тысяч']);
+			phrase = `${this.__setTextDigit(
+				digit[0],
+				true
+			)} ${thousend} ${this.__setTextDigit(digit[1])}`;
 		} else if (digit.length == 3) {
-			thousend = digit[1] > 0 ? this.__setPhraseIndex(digit[1], ["тысяча", "тысячи", "тысяч"]) : '';
-			million = this.__setPhraseIndex(digit[0], ["миллион", "миллиона", "миллионов"]);
-			phrase = `${this.__setTextDigit(digit[0])} ${million} ${this.__setTextDigit(digit[1], true)} ${thousend} ${this.__setTextDigit(digit[2])}`
+			thousend =
+				digit[1] > 0
+					? this.__setPhraseIndex(digit[1], ['тысяча', 'тысячи', 'тысяч'])
+					: '';
+			million = this.__setPhraseIndex(digit[0], [
+				'миллион',
+				'миллиона',
+				'миллионов',
+			]);
+			phrase = `${this.__setTextDigit(
+				digit[0]
+			)} ${million} ${this.__setTextDigit(
+				digit[1],
+				true
+			)} ${thousend} ${this.__setTextDigit(digit[2])}`;
 		}
 		return phrase;
 	}
@@ -149,7 +238,7 @@ export default class stringFormat extends stringFormatBase {
 	__setCut(value) {
 		let string = value.slice(0, 14);
 		if (string.length < value.length) {
-			string += "..."
+			string += '...';
 		}
 		return string;
 	}
@@ -171,6 +260,8 @@ export default class stringFormat extends stringFormatBase {
 	}
 
 	__setResult(value) {
-		$(this.el.container).find(this.el.result).html(`<strong> ${value}</strong>`);
+		$(this.el.container)
+			.find(this.el.result)
+			.html(`<strong> ${value}</strong>`);
 	}
 }
