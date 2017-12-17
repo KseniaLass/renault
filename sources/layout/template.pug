@@ -7,12 +7,15 @@ html
 	head
 		meta(charset='UTF-8')/
 		meta(name='viewport', content='width=device-width')/
+		meta(name="format-detection" content="telephone=no")/
+		link(rel="icon" type="image/x-icon" href="/favicon.ico")/
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')/
 		link(rel='stylesheet', href='/css/style.css')/
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
+		script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
 		//script(src='/js/require.js')
 
-		title HTML Page
+		title Петровский автоцентр
 
 		block head
 	body
@@ -21,4 +24,4 @@ html
 				block content
 
 		//script(src='/js/custom.js')
-		//script(src='/js/vendor.js')
+		script(src='/js/vendor.js')

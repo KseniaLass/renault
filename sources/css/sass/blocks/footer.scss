@@ -1,0 +1,76 @@
+.footer {
+  background: #333333;
+  color: #ffffff;
+  padding: 27px 0;
+  font-size: 14px;
+  min-height:208px;
+  @include breakpoint($tablet) {
+    min-height:0;
+    padding: 50px 0;
+  }
+  &__content {
+
+  }
+  &__left {
+    width: 100%;
+    @include breakpoint($tablet) {
+      width: 70%;
+      float: left;
+      padding: 10px 0;
+    }
+    @include breakpoint($desktop) {
+      width:75%;
+    }
+  }
+  &__text {
+
+  }
+  &__links {
+    text-align: center;
+    margin-bottom:26px;
+    @include breakpoint($tablet) {
+      display: block;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    margin:0 10px;
+    @include breakpoint($tablet) {
+      display: inline-block !important;
+      margin: 0 42px 0 0;
+    }
+
+
+  }
+  &__text {
+    position: absolute;
+    top:123px;
+    text-align: center;
+    left: 0;
+    padding: 0 15px;
+    font-size: 13px;
+    @include breakpoint($tablet) {
+      font-size: 10px;
+      position: relative;
+      display: inline-block;
+      top:0;
+      text-align: left;
+      padding: 0;
+    }
+    @include breakpoint($desktop) {
+      font-size: 13px;
+    }
+  }
+  &__right {
+    text-align: center;
+    @include breakpoint($tablet) {
+      text-align: right;
+    }
+    a {
+      text-align: center;
+      width:180px;
+    }
+  }
+}

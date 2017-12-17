@@ -1,0 +1,132 @@
+.menu{
+  color: $base-grey;
+  @include clearfix();
+  &__content {
+    @include grid-span(12,1);
+    padding:7px 0 4px;
+    @include breakpoint($tablet) {
+      padding:10xp 0;
+    }
+    @include breakpoint($desktop) {
+      padding: 21px 0;
+    }
+  }
+  &__renault {
+    @include grid-span(3, 1);
+    text-align: right;
+    padding:8px 0;
+    img {
+      max-width:100%;
+    }
+    @include breakpoint($tablet) {
+      text-align: right;
+      @include grid-span(3, 10);
+      padding: 11px 0 2px 25px;
+    }
+    @include breakpoint($desktop) {
+      padding: 2px 0 2px 25px;
+    }
+  }
+  &__logo {
+    @include grid-span(2, 6);
+    text-align: center;
+    @include breakpoint($tablet) {
+      @include grid-span(1, 1);
+      padding: 12px 0;
+    }
+    @include breakpoint($desktop) {
+      padding: 0;
+    }
+    img {
+      vertical-align: middle;
+      max-width:100%;
+      max-height:44px;
+      @include breakpoint($tablet) {
+        max-height:100%;
+      }
+    }
+  }
+  &__phone {
+    @include grid-span(5, 8);
+    text-align: right;
+    padding: 9px 0 11px 18px;
+    @include breakpoint($tablet) {
+      padding: 11px 0;
+      @include grid-span(4, 7);
+      font-size: 16px;
+      text-align: left;
+    }
+    @include breakpoint($desktop) {
+
+      padding: 8px 0;
+    }
+    @include breakpoint($desktop) {
+      font-size: 18px;
+      padding:7px 0 10px 54px;
+    }
+    img {
+      vertical-align: middle;
+      margin-right:5px;
+    }
+    span {
+      color: #000000;
+      vertical-align: middle;
+      display: inline-block;
+      width: 100%;
+      @include breakpoint($tablet) {
+        margin-bottom: 6px;
+      }
+    }
+    &__link {
+      color: #848484;
+      font-size: 12px;
+    }
+    &__num {
+      display: inline-block;
+      position: relative;
+      padding-left:12px;
+      padding-top: 1px;
+      @include breakpoint($tablet) {
+        padding-left:26px;
+        padding-top: 0;
+        float: left;
+      }
+      &:before {
+        content: '';
+        background: url('../img/phone.svg') no-repeat;
+        width: 18px;
+        height: 18px;
+        background-size: contain;
+        position: absolute;
+        left: 0px;
+        top: 1px;
+        @include breakpoint($tablet) {
+          width: 30px;
+          height: 37px;
+          top:5px;
+        }
+      }
+    }
+  }
+  &__text {
+    @include grid-span(5, 2);
+    vertical-align: middle;
+    line-height:1;
+    padding:12px 0;
+
+    strong {
+      text-transform: uppercase;
+      display: inline-block;
+      width: 100%;
+      font-weight:normal;
+      font-size: 16px;
+      @include breakpoint($desktop) {
+        margin-bottom: 3px;
+        font-size: 18px;
+      }
+    }
+    span {
+      font-size: 12px;
+    }
+  }
+}

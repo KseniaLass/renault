@@ -1,0 +1,26 @@
+.advan {
+  background: #EEF0F3;
+  padding: 77px 0;
+  @include clearfix();
+  &__content {
+    @include grid-span(12, 1);
+  }
+  &__item {
+    width:25%;
+    text-align: center;
+    float: left;
+
+   &__img {
+     height: 118px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom:10px;
+   }
+    &__text {
+      font-size: 16px;
+      color: $base-grey;
+      text-transform: uppercase;
+    }
+  }
+}

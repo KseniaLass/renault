@@ -1,0 +1,65 @@
+.contacts
+    .container
+        .contacts__content
+            h2.contacts__title Контакты
+
+            .contacts__form
+                .contacts__selectbox.selectbox.tablet-hide
+                    .selectbox__input.js-dropdown Салон на Ленинском
+                    .selectbox__dropdown(data-tabs="contacts")
+                        .selectbox__item(data-target="#leninskiy") Салон на Ленинском
+                        .selectbox__item(data-target="#rustaveli") Салон на Руставели
+                        .selectbox__item(data-target="#sofiyskaya") Салон на Софийской
+
+                .contacts__addr.is-active#leninskiy
+                    .contacts__addr__title.mobile-hide На Ленинском
+                    .contacts__addr__row.contacts__addr__row-address
+                        .contacts__addr__label Адрес
+                        .contacts__addr__text Ленинский пр., 101, к. 3
+
+                    .contacts__addr__row.contacts__addr__row-phone
+                        .contacts__addr__label Телефон
+                        .contacts__addr__text +7 812 606-70-55
+
+                    .contacts__addr__row.contacts__addr__row-btn
+                        a(href="#" data-popup="callback-popup").contacts__addr__link.btn-transparent.js-open-popup Перезвоните мне
+
+                    .contacts__addr__row.contacts__addr__row-time
+                        .contacts__addr__label График работы
+                        .contacts__addr__text 9:00 - 21:00
+
+                .contacts__addr#rustaveli
+                    .contacts__addr__title.mobile-hide На Руставели
+                    .contacts__addr__row.contacts__addr__row-address
+                        .contacts__addr__label Адрес
+                        .contacts__addr__text ул. Руставели, д. 31, корп. 3
+
+                    .contacts__addr__row.contacts__addr__row-phone
+                        .contacts__addr__label Телефон
+                        .contacts__addr__text +7 812 606-70-55
+
+                    .contacts__addr__row.contacts__addr__row-btn
+                        a(href="#" data-popup="callback-popup").contacts__addr__link.btn-transparent.js-open-popup Перезвоните мне
+
+                    .contacts__addr__row.contacts__addr__row-time
+                        .contacts__addr__label График работы
+                        .contacts__addr__text 9:00 - 21:00
+
+                .contacts__addr#sofiyskaya
+                    .contacts__addr__title.mobile-hide На Софийской
+                    .contacts__addr__row.contacts__addr__row-address
+                        .contacts__addr__label Адрес
+                        .contacts__addr__text ул. Софийская, 87
+
+                    .contacts__addr__row.contacts__addr__row-phone
+                        .contacts__addr__label Телефон
+                        .contacts__addr__text +7 812 606-70-55
+
+                    .contacts__addr__row.contacts__addr__row-btn
+                        a(href="#" data-popup="callback-popup").contacts__addr__link.btn-transparent.js-open-popup Перезвоните мне
+
+                    .contacts__addr__row.contacts__addr__row-time
+                        .contacts__addr__label График работы
+                        .contacts__addr__text 9:00 - 21:00
+
+                .contacts__map#map

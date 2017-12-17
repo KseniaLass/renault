@@ -1,0 +1,46 @@
+.sale {
+  padding: 40px 0 100px;
+  @include clearfix();
+  @include breakpoint($tablet) {
+    padding:65px 0 143px;
+  }
+  &__content {
+
+  }
+  &__title {
+  }
+  &__item {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+    @include breakpoint($tablet) {
+      width: 220px;
+      float: left;
+      max-width:220px;
+      margin: 0 3px 15px;
+    }
+    @include breakpoint($desktop) {
+      width: 25%;
+      margin: 0 7px 33px;
+    }
+    &__img {
+      height: 132px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 12px;
+      img {
+        max-width:100%;
+      }
+    }
+    &__title {
+      font-size: 16px;
+      color: #222222;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    &__btn {
+
+    }
+  }
+}

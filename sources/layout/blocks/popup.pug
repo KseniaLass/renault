@@ -1,0 +1,55 @@
+.popup#sale-popup
+    .popup__overlay.js-close-popup
+    .popup__body
+        .popup__close.js-close-popup
+        .popup__title Заявка
+        .popup__text Оставьте заявку и наши менеджеры свяжутся с вами для уточнения условий получения скидки
+        .popup__form.form
+            form.form__field.js-ajax
+                .form__selectbox.selectbox.form__row
+                    .selectbox__input.js-dropdown Выберите салон
+                    .selectbox__dropdown.js-item
+                        .selectbox__item На Ленинском
+                        .selectbox__item На Руставели
+                        .selectbox__item На Софийской
+                .form__input.form__row
+                    label(for='sale-form-input') Ваш номер телефона
+                    input(type="tel" id="sale-form-input" name="phone")
+                    input(type="hidden" name="form" value="Заявка")
+                input(type="submit" value="Получить скидку").form__btn.btn-yellow
+
+.popup#callback-popup
+    .popup__overlay.js-close-popup
+    .popup__body
+        .popup__close.js-close-popup
+        .popup__title Обратный звонок
+        .popup__text Оставьте заявку и&nbsp;наши менеджеры свяжутся с&nbsp;вами в&nbsp;ближайшее время
+        .popup__form.form
+            form.form__field.js-ajax
+                .form__selectbox.selectbox.form__row
+                    .selectbox__input.js-dropdown Выберите салон
+                    .selectbox__dropdown.js-item
+                        .selectbox__item На Ленинском
+                        .selectbox__item На Руставели
+                        .selectbox__item На Софийской
+                .form__input.form__row
+                    label(for='callback-form-input') Ваш номер телефона
+                    input(type="tel" id="callback-form-input" name="phone")
+                    input(type="hidden" name="form" value="Обратный звонок")
+                input(type="submit" value="Получить скидку").form__btn.btn-yellow
+
+.popup#success-popup
+    .popup__overlay.js-close-popup
+    .popup__body
+        .popup__close.js-close-popup
+        .popup__title Спасибо за обращение!
+        .popup__text Мы свяжемся с вами в ближайшее время!
+
+.popup#fail-popup
+    .popup__overlay.js-close-popup
+    .popup__body
+        .popup__close.js-close-popup
+        .popup__title Произошла ошибка!
+        .popup__text Пожалуйста, попробуйте позже.
+
+

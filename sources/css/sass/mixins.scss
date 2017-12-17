@@ -460,3 +460,10 @@
 @mixin color-debug ($r, $g, $b, $a) {
 //	background-color: rgba($r, $g, $b, $a);
 }
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}

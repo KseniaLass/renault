@@ -1,20 +1,34 @@
 @import 'sass/mixins';
 @import 'sass/reset';
 
+@import 'config/grid';
+@import 'config/color';
+
 @import '../../bower_components/breakpoint-sass/stylesheets/_breakpoint.scss';
 @import '../../bower_components/singularity/stylesheets/_singularitygs.scss';
 
 
+html, body {
+	height:auto;
+}
+
 body {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight:200;
 
 	//	-webkit-transform: translate3d(0,0,0);
 	//min-width: 1400px;
 }
 
+@include add-grid(12);
+@include add-gutter(1/3);
+
+@include sgs-change('debug', true);
+
+//@include sgs-change('output', 'float');
+
 .wrapper  {
 	width: 100%;
-	//	height: 100%;
 	min-height: 100%;
 	position: relative;
 	height: auto !important;
@@ -27,25 +41,162 @@ body {
 	height: 100%;
 	width: 100%;
 }
-.learning__row {
-	margin: 20px 10px;
+
+.container {
+	width: 100%;
+	max-width: 500px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0 10px;
+	@include clearfix;
+
+	@include breakpoint($tablet) {
+		max-width:100%;
+		width: 740px;
+		padding: 0 22px;
+	}
+	@include breakpoint($desktop) {
+		min-width: 940px;
+		padding: 0;
+	}
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+
+* {
+	@include box-sizing(border-box)
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+	outline:none;
+}
+
+input[type='submit']
+{
 	-webkit-appearance: none;
-	margin: 0;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+}
+input[type="text"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
+.mobile-hide {
+	display: none !important;
+	@include breakpoint($tablet) {
+		display: block !important;
+	}
+}
+.tablet-hide {
+	display: block !important;
+	@include breakpoint($tablet) {
+		display: none !important;
+	}
+}
 
-@import 'sass/main';
+h2 {
+	font-size: 30px;
+	color: $dark-grey;
+	text-align: center;
+	margin-bottom: 9px;
+	font-weight:200;
+	@include breakpoint($tablet) {
+		font-size: 48px;
+		font-weight:400;
+		margin-bottom: 33px;
+	}
+}
 
-@import 'sass/header';
-@import 'sass/title';
-@import 'sass/menu';
-@import 'sass/banner';
-@import 'sass/products';
-@import 'sass/articles';
-@import 'sass/footer';
-@import 'sass/modal';
-@import 'sass/autocomplete';
-@import 'sass/learning';
+.btn-transparent {
+	text-decoration: none;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 10px;
+	color: #737880;
+	border: 1px solid;
+	height:42px;
+	width:185px;
+	text-align: center;
+	line-height:42px;
+	transition: .2s linear;
+	&:hover,
+	&:active,
+	&:focus {
+		border: 1px solid;
+		background: #737880;
+		color: #ffffff;
+
+	}
+}
+.btn-white-transparent {
+	text-decoration: none;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #ffffff;
+	border: 1px solid;
+	height:60px;
+	width:134px;
+	text-align: center;
+	line-height:56px;
+	background: transparent;
+	cursor: pointer;
+	transition: .2s linear;
+	&:hover,
+	&:active,
+	&:focus {
+		border: 1px solid;
+		background: #ffffff;
+		color: #f8b804;
+	}
+}
+.btn-yellow-transparent {
+	text-decoration: none;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #F8B600;
+	border: 1px solid;
+	height:60px;
+	width:134px;
+	text-align: center;
+	line-height:58px;
+	background: transparent;
+	cursor: pointer;
+	transition: .2s linear;
+	&:hover,
+	&:active,
+	&:focus {
+		border: 1px solid;
+		background: #F8B600;
+		color: $dark-grey;
+	}
+}
+.btn-yellow {
+	background: #F8B600;
+	font-size: 14px;
+	color: #000000;
+	width: 73%;
+	height: 60px;
+	margin: 0 auto;
+	text-transform: uppercase;
+	text-align: center;
+	border: 0;
+	margin-bottom: 10px;
+	@include breakpoint($tablet) {
+		width: 194px;
+	}
+}
+.error {
+	color: red !important;
+	.selectbox__input,
+	input {
+		border: 1px solid red !important;
+	}
+}
+
+@import "sass/main";

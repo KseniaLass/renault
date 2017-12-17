@@ -1,29 +1,18 @@
--var pageLink
 .menu
-	.container
-		ul.menu__navbar
-			li.menu__navbar-item
-				if pageLink == 'articles'
-					a.is-active(href='/articles.html') Статьи
-				else
-					a(href='/articles.html') Статьи
-			li.menu__navbar-item
-				if pageLink == 'clinics'
-					a.is-active(href='/clinics.html') Наши клиники
-				else
-					a(href='/clinics.html') Наши клиники
-			li.menu__navbar-item
-				if pageLink == 'food'
-					a.is-active(href='/food.html') Корма
-				else
-					a(href='/food.html') Корма
-			li.menu__navbar-item
-				if pageLink == 'action'
-					a.is-active(href='/action.html') Акции
-				else
-					a(href='/action.html') Акции
-			li.menu__navbar-item
-				if pageLink == 'students'
-					a.is-active(href='/students.html') Студентам
-				else
-					a(href='/students.html') Студентам
+    .container
+        .menu__content
+            .menu__renault
+                img(src="../img/renault.png" title="Renault")
+
+            .menu__logo
+                img(src="../img/logo.png" title="Петровский автоцентр")
+
+            .menu__text.mobile-hide
+                strong ПЕТРОВСКИЙ АВТОЦЕНТР
+                span Официальный дилер Renault в&nbsp;Санкт&#8209;Петербурге и&nbsp;Москве
+
+            .menu__phone
+                .menu__phone__num
+                    span (812) 606-70-55
+                    a(href="#" data-popup="callback-popup").menu__phone__link.mobile-hide.js-open-popup Заказать обратный звонок
+

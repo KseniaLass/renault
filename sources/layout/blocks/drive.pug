@@ -1,0 +1,17 @@
+.drive
+    .container
+        .drive__content
+            h2.drive__title Записаться на тест драйв
+            .drive__form.form
+                form.form__field.js-ajax
+                    .form__selectbox.selectbox.form__row
+                        .selectbox__input.js-dropdown Выберите салон
+                        .selectbox__dropdown.js-item
+                            .selectbox__item На Ленинском
+                            .selectbox__item На Руставели
+                            .selectbox__item На Софийской
+                    .form__input.form__row
+                        label(for='drive-form-input') Ваш номер телефона
+                        input(type="tel" id="drive-form-input" name="phone")
+                        input(type="hidden" name="form" value="Записаться на тест драйв")
+                    input(type="submit" value="ЗАПИСАТЬСЯ").form__btn.btn-white-transparent

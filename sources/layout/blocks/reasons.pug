@@ -1,0 +1,38 @@
+.reasons
+    .container
+        .reasons__content
+            h2.reasons__title Почему мы?
+            .reasons__item
+                .reasons__item__img
+                    img(src="../img/reason1.png")
+                .reasons__item__title лучший дилер Рено
+                .reasons__item__text Петровский Автоцентр&nbsp;—&nbsp;один из&nbsp;крупнейших официальных дилеров Renault&nbsp;(Рено) в&nbsp;России
+
+            .reasons__item
+                .reasons__item__img
+                    img(src="../img/reason2.png")
+                .reasons__item__title высокие стандарты обслуживания
+                .reasons__item__text Петровский Автоцентр&nbsp;—&nbsp;один из&nbsp;крупнейших официальных дилеров Renault&nbsp;(Рено) в&nbsp;России
+
+            .reasons__item
+                .reasons__item__img
+                    img(src="../img/reason3.png")
+                .reasons__item__title 22&nbsp;года на&nbsp;рынке
+                .reasons__item__text Петровский Автоцентр&nbsp;—&nbsp;один из&nbsp;крупнейших официальных дилеров Renault&nbsp;(Рено) в&nbsp;России
+
+    .reasons__footer
+        .container
+            .reasons__form.form.mobile-hide
+                .form__text «Петровский автоцентр» дарит дополнительная выгода к любому предложению на втомобиль 10 000 рублей
+                form.form__field.js-ajax
+                    .form__selectbox.selectbox.form__row
+                        .selectbox__input.js-dropdown Выберите салон
+                        .selectbox__dropdown.js-item
+                            .selectbox__item На Ленинском
+                            .selectbox__item На Руставели
+                            .selectbox__item На Софийской
+                    .form__input.form__row
+                        label(for='reasons-form-input') Ваш номер телефона
+                        input(type="tel" id="reasons-form-input" name="phone")
+                        input(type="hidden" name="form" value="«Петровский автоцентр» дарит дополнительная выгода к любому предложению на втомобиль 10 000 рублей")
+                    input(type="submit" value="Получить купон").form__btn.btn-yellow

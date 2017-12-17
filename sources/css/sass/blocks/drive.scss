@@ -1,0 +1,41 @@
+.drive {
+  background: url('../img/drive-bg.png') no-repeat;
+  background-position: 100% 100%;
+  background-size: cover;
+  padding: 30px 0 42px;
+  @include breakpoint($tablet) {
+    padding:58px 0 66px;
+  }
+  &__content {
+
+  }
+  &__title {
+    color: #ffffff;
+    font-size: 25px;
+    margin-bottom:18px;
+    @include breakpoint($tablet) {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+  }
+  &__form {
+    text-align: center;
+    @include clearfix();
+    @include breakpoint($desktop) {
+      padding: 0 64px;
+    }
+    .form__row {
+      @include breakpoint($desktop) {
+        width:320px;
+      }
+    }
+    .form__btn {
+      @include breakpoint($tablet) {
+        float: left;
+        margin-left: 20px;
+        width: 132px;
+      }
+
+    }
+  }
+}

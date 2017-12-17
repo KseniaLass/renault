@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="492px" height="434px" viewBox="0 0 492 434" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>video-camera</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="petrovsky-retarget" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-849.000000, -2763.000000)">
+        <g id="test-drive" transform="translate(0.000000, 2458.000000)" fill="#EEF0F3" fill-rule="nonzero">
+            <g id="video-camera" transform="translate(849.000000, 305.000000)">
+                <path d="M357.714,394.331 C357.714,403.659 347.038,411.222 333.867,411.222 L23.847,411.222 C10.676,411.222 0,403.659 0,394.331 L0,174.735 C0,165.405 10.676,157.843 23.847,157.843 L333.867,157.843 C347.038,157.843 357.714,165.407 357.714,174.735 L357.714,394.331 Z" id="Shape"></path>
+                <circle id="Oval" cx="89.428" cy="89.706" r="59.619"></circle>
+                <circle id="Oval" cx="253.381" cy="74.801" r="74.524"></circle>
+                <path d="M491.858,418.677 C491.858,418.677 489.872,433.581 475.959,433.581 C462.047,433.581 372.619,350.161 372.619,339.184 L372.619,229.882 C372.619,218.906 460.062,135.484 475.959,135.484 C491.858,135.484 491.858,150.389 491.858,150.389 L491.858,418.677 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

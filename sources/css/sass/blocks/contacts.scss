@@ -1,0 +1,120 @@
+.contacts {
+  background: #EEF0F3;
+  padding: 31px 0;
+
+  padding-bottom: 273px;
+  @include breakpoint($tablet) {
+    padding: 62px 0 67px;
+  }
+  &__content {
+
+  }
+  &__title {
+    margin-bottom:22px;
+    @include breakpoint($tablet) {
+      margin-bottom: 36px;
+    }
+  }
+  &__form {
+    background: #ffffff;
+    box-shadow: 0 22px 34px 0 rgba(86, 99, 120, .32);
+    padding: 21px 21px 44px;
+    @include clearfix;
+
+    @include breakpoint($tablet) {
+      padding: 0 0 430px;
+      position: relative;
+    }
+  }
+  &__selectbox {
+    margin-bottom:12px;
+  }
+  &__addr {
+    display: none;
+    padding: 0 13px;
+    @include breakpoint($tablet) {
+      display: block !important;
+      padding:0;
+
+    }
+    &.is-active {
+      display: block;
+    }
+
+    @include breakpoint($tablet) {
+      width:33%;
+      float: left;
+    }
+
+    @include breakpoint($desktop) {
+      width:218px;
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        margin-right: 20px;
+      }
+    }
+
+    @include breakpoint($desktop) {
+      width:300px;
+
+    }
+    &__title {
+      height: 84px;
+      font-size: 16px;
+      text-transform: uppercase;
+      border-left: 5px solid #F8B600;
+      padding: 37px 34px;
+    }
+    &__item {
+
+    }
+    &__row {
+
+      &-address {
+        margin-bottom: 24px;
+        @include breakpoint($tablet) {
+          margin-top: -8px;
+        }
+      }
+      &-phone {
+        margin-bottom: 16px;
+      }
+      &-btn {
+        margin-bottom: 21px;
+      }
+      @include breakpoint($tablet) {
+        padding: 0 0 0 38px;
+      }
+    }
+    &__label {
+      font-size: 12px;
+      color: $from-grey;
+      margin-bottom: 13px;
+    }
+    &__text {
+      font-size: 16px;
+      color: $dark-grey;
+      @include breakpoint($tablet) {
+        font-size: 13px;
+      }
+      @include breakpoint($desktop) {
+        font-size: 16px;
+      }
+    }
+    &__link {
+      width: 140px;
+    }
+  }
+  &__map {
+    height: 247px;
+    width: 100%;
+    bottom:-273px;
+    position: absolute;
+    left:0;
+    @include breakpoint($tablet) {
+      bottom: 0;
+      height:404px;
+    }
+  }
+}

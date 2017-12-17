@@ -1,0 +1,53 @@
+.models {
+  background: url('../img/video.svg') no-repeat;
+  background-position: 90% 158%;
+  padding: 45px 0;
+  @include breakpoint($tablet) {
+    padding: 33px 0;
+  }
+  &__content {
+
+  }
+  &__title {
+    @include breakpoint($tablet) {
+      margin-bottom: 20px;
+    }
+
+  }
+  &__block {
+
+  }
+  &__list {
+    text-align: center;
+    margin-bottom: 37px;
+
+    &__item {
+      display: inline-block;
+      margin: 0 5px;
+      @include breakpoint($tablet) {
+        margin:0 8px;
+      }
+    }
+    &__link {
+      text-decoration: none;
+      border: 1px dotted;
+      color: #393939;
+      display: inline-block;
+      height: 35px;
+      min-width:82px;
+      padding: 8px 15px;
+      font-size: 16px;
+      &.is-active {
+        background: #EEF0F3;
+        border: 1px dotted;
+      }
+    }
+  }
+  &__video {
+    text-align: center;
+    iframe {
+      box-shadow: 0 42px 44px 0 rgba(86, 105, 133, .54);
+      margin:0 auto;
+    }
+  }
+}

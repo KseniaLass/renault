@@ -1,0 +1,50 @@
+.selectbox {
+  position: relative;
+  font-size: 16px;
+  color: #393939;
+  &__input {
+    border: 1px solid #D3D8E1;
+    height:61px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding:0 20px;
+    background: #ffffff;
+    &:after {
+      content: '';
+      background: url('../img/bottom-arrow.svg') no-repeat;
+      width:15px;
+      height: 8px;
+      background-size: contain;
+      position: absolute;
+      right:15px;
+      top: 50%;
+      margin-top: -4px;
+    }
+  }
+  &__dropdown {
+    display: none;
+    border:1px solid #D3D8E1;
+    position: absolute;
+    top:60px;
+    width:100%;
+    left:0;
+    background: #ffffff;
+    z-index:1;
+    &.is-active {
+      display: block;
+    }
+  }
+  &__item {
+    height:61px;
+    border-bottom: 1px solid #D3D8E1;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    cursor: pointer;
+    &:hover {
+      background:#D3D8E1;
+    }
+  }
+}

@@ -2,17 +2,23 @@ extends layout/template
 
 block vars
 	- var pageTemplate = 'index'; // page-specific var
+	- var pageName = 'Акции';
+	- var pageLink = 'action'
 
 block head
 	script(src="/js/main.bundle.js")
 
-
 block content
-	include layout/blocks/header
 	include layout/blocks/menu
-	include layout/blocks/banner
-	include layout/blocks/products
-	include layout/blocks/articles
+	include layout/blocks/main
+	include layout/blocks/advan
+	include layout/blocks/sale
+	include layout/blocks/reasons
+	include layout/blocks/models
+	include layout/blocks/drive
+	include layout/blocks/contacts
 	include layout/blocks/footer
-	include layout/blocks/modal
-	.overlay.js-overlay
+
+	include layout/blocks/popup
+
+	.overlay

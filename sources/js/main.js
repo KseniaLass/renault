@@ -1,124 +1,173 @@
 // main bundle >> main.bundle.js
 
-/* global $ */
-import ValidForm from './modules/module.validForm';
-import autocomplete from './modules/module.autocomplete';
-import stringFormat from './modules/module.stringFormat';
 
-$(function() {
-	$('body')
-		// Show mobile menu
-		.on('click', '.js-header-mobile-button', function() {
-			$('.wrapper').toggleClass('is-show-menu');
-		})
-		// Show tabs
-		.on('click', '.js-tab-link', function() {
-			let $li = $(this),
-				$liParent = $li.closest('.js-tabs-list'),
-				$liList = $liParent.find('.js-tab-link'),
-				dataLink = $li.data('link'),
-				$curTabs = $('.js-tab[data-link="' + dataLink + '"]');
+$(document).ready(function(){
+    // Selectbox
+    $('.js-dropdown').click(function(e){
+        e.stopPropagation();
+        //e.preventDefault();
+        var $list = $(this).closest('.selectbox').find('.selectbox__dropdown');
+        $(this).closest('.form__row').removeClass('error');
+        if($(this).hasClass('is-open')) {
+            $list.removeClass('is-active');
+            $(this).removeClass('is-open');
+        } else {
+            $list.addClass('is-active');
+            $(this).addClass('is-open');
+        }
 
-			$li.addClass('is-active');
-			$liList.not($li).removeClass('is-active');
-			$curTabs
-				.addClass('is-active')
-				.closest('.js-tabs-content')
-				.find('.js-tab')
-				.not($curTabs)
-				.removeClass('is-active');
-			$liParent.toggleClass('open');
-		})
-		// Open/close modal
-		.on('click', '.js-popup-link', function() {
-			let $modal = $('.js-modal');
+    });
+    $('body').click(function(e){
+        $('.selectbox__dropdown').removeClass('is-active');
+        $('.js-dropdown').removeClass('is-open')
+    });
+    $('.selectbox__dropdown').click(function(e){
+        e.stopPropagation();
+        var value = $(e.target).text();
+        var $input = $(this).closest('.selectbox').find('.selectbox__input');
+        $input.text(value);
+        $(this).removeClass('is-active');
 
-			$modal.addClass('animation-showModal is-on');
-			$('.wrapper').addClass('is-show-modal');
-			setTimeout(() => $modal.removeClass('animation-showModal'), 500);
-		})
-		.on('click', '.overlay', function() {
-			let $modal = $('.js-modal');
+        var tabs = $(this).data('tabs');
 
-			$modal.addClass('animation-hideModal');
-			$('.wrapper').removeClass('is-show-modal');
-			setTimeout(() => $modal.removeClass('animation-hideModal is-on'), 450);
-		})
-		// Form input label
-		.on('focus', '.js-form-input', function() {
-			let $input = $(this),
-				$parent = $input.closest('.form__row');
+        if(tabs === 'contacts') {
+            var target = $(e.target).data('target');
+            $('.contacts__addr').removeClass('is-active');
+            $('.contacts__form').find(target).addClass('is-active');
+        }
 
-			$parent.addClass('is-active');
-		})
-		.on('blur', '.js-form-input', function() {
-			let $input = $(this),
-				$parent = $input.closest('.form__row'),
-				val = $input.val();
+    });
 
-			if (val.length == 0) {
-				$parent.removeClass('is-active');
-			}
-		})
-		//  Remove error from input
-		.on('focus', '.js-form-input', function() {
-			$(this).removeClass('animation-shakeError is-error');
-		})
-		// Simple form validation
-		.on('click', '.js-form-submit-btn', function() {
-			let valid = new ValidForm({
-				valid: true
-			});
-		});
+    // Input label
+    $('input[type="tel"]').focus(function(e){
+        $(this).closest('.form__row').removeClass('error');
+        $(this).closest('.form__input').addClass('is-focus');
+    });
+    $('input[type="tel"]').blur(function(e){
+        if($(this).val().length === 0 || $(this).val() === '+7 (___) ___-__-__') {
+            $(this).closest('.form__input').removeClass('is-focus');
+        }
+    });
 
-	let source = [
-		'ActionScript',
-		'AppleScript',
-		'Asp',
-		'BASIC',
-		'C',
-		'C++',
-		'Clojure',
-		'COBOL',
-		'ColdFusion',
-		'Erlang',
-		'Fortran',
-		'Groovy',
-		'Haskell',
-		'Java',
-		'JavaScript',
-		'Lisp',
-		'Perl',
-		'PHP',
-		'Python',
-		'Ruby',
-		'Scala',
-		'Scheme'
-	];
-	let lang = new autocomplete({
-		element: $('.js-autocomplete'),
-		length: 1,
-		source: source,
-		filter: 'direct',
-		appendTo: $('.autocomplete-menu')
-	});
-	// StringFormat
+    //Masked Input
+    $('input[type="tel"]').mask('+7 (999) 999-99-99',{autoclear: false});
 
-	let stringDigits = new stringFormat({
-		container: '.js-stringDigits',
-		result: '.js-digitResult'
-	});
+    //Video tabs
+    $('.js-video-tabs').click(function(e){
+        e.preventDefault();
+        var target = $(this).data('video');
+        $('.js-video-tabs').removeClass('is-active');
+        $(this).addClass('is-active');
+        $('#video').attr('src', 'https://www.youtube.com/embed/'+target);
+    });
 
-	let stringCut = new stringFormat({
-		container: '.js-stringCut',
-		result: '.js-cutResult'
-	});
-	let stringDeclension = new stringFormat({
-		container: '.js-stringDeclension',
-		result: '.js-declensionResult'
-	});
-	let stringToText = new stringFormat({
-		container: '.js-stringToText',
-		result: '.js-toTextResult'
-	});
+    // Popup
+    $('.js-close-popup').click(function(e) {
+        e.preventDefault();
+        $('.popup').removeClass('is-active');
+        $('html, body').css('overflow', 'auto');
+    });
+    $('.js-open-popup').click(function(e){
+        e.preventDefault();
+       var popup = $(this).data('popup');
+        showPopup(popup);
+    });
+
+    // Maps
+    ymaps.ready(init);
+    var myMap,
+        myPlacemark;
+    function init() {
+        myMap = new ymaps.Map('map', {
+            center: [59.952529, 30.374233],
+            zoom: 9
+        });
+        var coords = {
+            'leninsky': { ballon: 'Ленинский пр., 101, к. 3', coord: [59.850988, 30.224321]},
+            'rustavely': { ballon: 'ул. Руставели, д. 31, корп. 3', coord: [60.008378, 30.436575]},
+            'sof': { ballon: 'ул. Софийская, 87', coord: [59.844981, 30.430035]}
+        };
+
+        var myCollections = new ymaps.GeoObjectCollection(null,{});
+
+        for(var prop in coords) {
+            console.log(coords[prop].ballon)
+            //yellowCollection.add(new ymaps.Placemark(yellowCoords[i]));
+            myCollections.add(new ymaps.Placemark(coords[prop].coord,
+                {
+                    hintContent: 'Москва!',
+                    balloonContent: coords[prop].ballon
+                },
+                {
+                    iconLayout: 'default#image',
+                    iconImageHref: '../img/logomap.png',
+                    iconImageSize: [40, 40]
+                })
+            )
+
+        }
+
+        myMap.geoObjects.add(myCollections);
+        myMap.controls.remove('rulerControl');
+        myMap.controls.remove('searchControl');
+        myMap.controls.remove('trafficControl');
+        myMap.controls.remove('layoutControl');
+        //myMap.behaviors.disable('scrollZoom');
+    }
+    function showPopup(popup) {
+        $('.popup').removeClass('is-active');
+        $('#'+popup).addClass('is-active');
+        $('html, body').css('overflow', 'hidden');
+    }
+
+    // Ajax
+
+    $('.js-ajax').submit(function(e){
+        e.preventDefault();
+        var $salon = $(this).find('.selectbox__input'),
+            salonValue = $salon.text();
+
+        var $phone = $(this).find('input[name="phone"]'),
+            phoneValue = $phone.val();
+
+        var form = $(this).find('input[name="form"]').val();
+
+        var error;
+
+        if (salonValue === 'Выберите салон' || salonValue === '') {
+            $salon.closest('.form__row').addClass('error');
+            error = true;
+        }
+        if (phoneValue === '+7 (___) ___-__-__' || phoneValue === '') {
+            $phone.closest('.form__row').addClass('error');
+            error = true;
+        }
+        if(error) {
+            return false
+        }
+
+        var data = {
+            salon: salonValue,
+            phone: phoneValue,
+            form: form
+        };
+
+        $.ajax({
+            type: "POST",
+            url: 'mail.php',
+            data: data,
+            success: function success(data) {
+                if (data == 'ok') {
+                    showPopup('success-popup');
+                    $('input[type="tel"]').val('').trigger('blur');
+                }
+            },
+            error: function error() {
+                showPopup('fail-popup');
+                $('input[type="tel"]').val('').trigger('blur');
+            }
+        });
+
+    })
+
 });

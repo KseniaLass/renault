@@ -1,8 +1,14 @@
 .footer
-	.container
-		.footer__links
-			a.footer__vk-link(href='vk.com')
-			a.footer__fb-link(href='facebook.com')
-		.footer__logo
-			a.footer__logo-link(href='#')
-				img(src='img/footer-logo.png')
+    .container
+        .footer__content
+            .footer__left
+                .footer__links
+                    a(href="#").footer__link.mobile-hide Правовая информация
+                    a(href="#").footer__link My Renault
+                    a(href="#").footer__link Renault assistance
+
+                .footer__text
+                    span 1995-2017 (c) Петровский автоцентр - официальный дилер Renault в Москве и Санкт-Петербурге
+
+            .footer__right
+                a(href='#' data-popup="callback-popup").btn-yellow-transparent.js-open-popup Обратная связь

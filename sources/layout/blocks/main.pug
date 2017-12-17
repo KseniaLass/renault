@@ -1,0 +1,19 @@
+.main
+    .main__content
+        .main__form.form
+            .form__title Купон на <strong>10 000 &#8381;</strong>
+            .form__text Только в декабре Петровский Автоцентр дарит дополнительную скидку 10 000 руб к любому предложению на автомобиль - нашему или другого дилера.*
+            form.form__field.js-ajax
+                .form__selectbox.selectbox.form__row
+                    .selectbox__input.js-dropdown Выберите салон
+                    .selectbox__dropdown.js-item
+                        .selectbox__item На Ленинском
+                        .selectbox__item На Руставели
+                        .selectbox__item На Софийской
+                .form__input.form__row
+                    label(for='main-form-input') Ваш номер телефона
+                    input(type="tel" id="main-form-input" name="phone")
+                input(type="hidden" name="form" value="Купон на 10 000 р")
+                input(type="submit" value="Получить скидку").form__btn.btn-yellow
+            .form__note * - скидки суммируются
+    .main__footer
