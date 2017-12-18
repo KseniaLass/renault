@@ -41,6 +41,9 @@
       width:30%;
       float: left;
     }
+    @include breakpoint($desktop) {
+      width: 33.33%;
+    }
     &__img {
       height:171px;
       display: flex;
@@ -53,7 +56,9 @@
       text-transform: uppercase;
       margin-top: -10px;
       margin-bottom: 6px;
-
+      @include breakpoint($desktop) {
+        padding: 0 45px;
+      }
     }
     &__text {
       color: $from-grey;
@@ -70,7 +75,7 @@
       height: auto;
       position: relative;
       margin-top:79px;
-      padding-top:275px;
+      padding-top:230px;
       padding-bottom:40px;
     }
   }
