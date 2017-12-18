@@ -3,9 +3,9 @@
     text-align: center;
     font-size: 36px;
     color: #000000;
+    font-weight:600;
     strong {
       font-size: 52px;
-      font-weight: normal;
     }
     @include breakpoint($tablet) {
       font-size: 48px;
