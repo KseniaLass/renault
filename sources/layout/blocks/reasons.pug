@@ -23,16 +23,16 @@
     .reasons__footer
         .container
             .reasons__form.form.mobile-hide
-                .form__text «Петровский автоцентр» дарит дополнительная выгода к любому предложению на автомобиль 10 000 рублей
+                .form__text «Петровский автоцентр» дарит дополнительную выгоду к любому предложению на автомобиль 10 000 рублей
                 form.form__field.js-ajax
                     .form__selectbox.selectbox.form__row
                         .selectbox__input.js-dropdown Выберите салон
                         .selectbox__dropdown.js-item
-                            .selectbox__item На Ленинском
-                            .selectbox__item На Руставели
-                            .selectbox__item На Софийской
+                            .selectbox__item(data-salon=2) На Ленинском
+                            .selectbox__item(data-salon=3) На Руставели
+                            .selectbox__item(data-salon=1) На Софийской
                     .form__input.form__row
                         label(for='reasons-form-input') Ваш номер телефона
                         input(type="tel" id="reasons-form-input" name="phone")
-                        input(type="hidden" name="form" value="«Петровский автоцентр» дарит дополнительная выгода к любому предложению на втомобиль 10 000 рублей")
+                        input(type="hidden" name="form" value="«Петровский автоцентр» дарит дополнительную выгоду к любому предложению на втомобиль 10 000 рублей")
                     input(type="submit" value="Получить купон").form__btn.btn-yellow
